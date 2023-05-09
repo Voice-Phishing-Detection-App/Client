@@ -1,5 +1,6 @@
 export const WHITE = '#ffffff';
 export const BLACK = '#000000';
+export const GRAY = '#a3a3a3';
 
 export const PRIMARY = {
   DARK: '#0E56AA',
