@@ -104,9 +104,9 @@ const SignInScreen = ({ navigation }) => {
   );
 };
 
-// SignInScreen.propTypes = {
-//   navigation: PropTypes.object,
-// };
+SignInScreen.propTypes = {
+  navigation: PropTypes.object,
+};
 
 const styles = StyleSheet.create({
   container: {

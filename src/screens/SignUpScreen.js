@@ -78,8 +78,8 @@ const SignUpScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    marginTop: '40%',
   },
   textContainer: {
     width: '70%',
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: '65%',
     padding: 5,
-    marginTop: 20,
+    marginTop: '10%',
   },
 });
 
