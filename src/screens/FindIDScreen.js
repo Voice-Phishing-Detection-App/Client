@@ -2,6 +2,7 @@ import { View, StyleSheet } from 'react-native';
 import TextInput, { ReturnKeyTypes } from '../components/TextInput';
 import { useEffect, useRef, useState } from 'react';
 import Button from '../components/Button';
+import Sbtn from '../components/Sbtn';
 
 const FindIdScreen = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -41,27 +42,34 @@ const FindIdScreen = ({ navigation }) => {
           value={name}
           onChangeText={(text) => setName(text.trim())}
           title={'이름'}
-          placeholder=""
           returnKeyType={ReturnKeyTypes.NEXT}
           onSubmitEditing={() => phoneRef.current.focus()}
         />
-        <TextInput
-          ref={phoneRef}
-          value={phone}
-          onChangeText={(text) => setPhone(text.trim())}
-          title={'전화번호'}
-          placeholder=""
-          returnKeyType={ReturnKeyTypes.NEXT}
-          onSubmitEditing={() => numberRef.current.focus()}
-        />
-        <TextInput
-          ref={numberRef}
-          value={number}
-          onChangeText={(text) => setNumber(text.trim())}
-          title={'인증번호'}
-          placeholder=""
-          returnKeyType={ReturnKeyTypes.DONE}
-        />
+        <View
+          style={{ flexDirection: 'row', alignItems: 'center', width: '80%' }}
+        >
+          <TextInput
+            ref={phoneRef}
+            value={phone}
+            onChangeText={(text) => setPhone(text.trim())}
+            title={'전화번호'}
+            returnKeyType={ReturnKeyTypes.NEXT}
+            onSubmitEditing={() => numberRef.current.focus()}
+          />
+          <Sbtn title={'인증'} onPress={() => {}} />
+        </View>
+        <View
+          style={{ flexDirection: 'row', alignItems: 'center', width: '80%' }}
+        >
+          <TextInput
+            ref={numberRef}
+            value={number}
+            onChangeText={(text) => setNumber(text.trim())}
+            title={'인증번호'}
+            returnKeyType={ReturnKeyTypes.DONE}
+          />
+          <Sbtn title={'확인'} onPress={() => {}} />
+        </View>
       </View>
       <View style={styles.buttonContainer}>
         <Button
@@ -82,7 +90,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textContainer: {
-    width: '70%',
+    width: '68%',
   },
   buttonContainer: {
     width: '65%',
