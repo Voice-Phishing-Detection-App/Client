@@ -40,7 +40,7 @@ const FindPassScreen = ({ navigation }) => {
       <View style={styles.textContainer}>
         <TextInput
           value={email}
-          onChangeText={(text) => setName(text.trim())}
+          onChangeText={(text) => setEmail(text.trim())}
           title={'아이디'}
           returnKeyType={ReturnKeyTypes.NEXT}
           onSubmitEditing={() => phoneRef.current.focus()}
