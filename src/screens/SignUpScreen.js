@@ -41,7 +41,6 @@ const SignUpScreen = ({ navigation }) => {
           value={name}
           onChangeText={(text) => setName(text.trim())}
           title={'이름'}
-          placeholder=""
           returnKeyType={ReturnKeyTypes.NEXT}
           onSubmitEditing={() => emailRef.current.focus()}
         />
@@ -50,7 +49,6 @@ const SignUpScreen = ({ navigation }) => {
           value={email}
           onChangeText={(text) => setEmail(text.trim())}
           title={'아이디'}
-          placeholder=""
           returnKeyType={ReturnKeyTypes.NEXT}
           onSubmitEditing={() => passwordRef.current.focus()}
         />
@@ -59,7 +57,6 @@ const SignUpScreen = ({ navigation }) => {
           value={password}
           onChangeText={(text) => setPassword(text.trim())}
           title={'비밀번호'}
-          placeholder=""
           returnKeyType={ReturnKeyTypes.DONE}
         />
       </View>
