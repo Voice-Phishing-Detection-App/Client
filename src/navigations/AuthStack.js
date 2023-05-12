@@ -4,6 +4,7 @@ import SignInScreen from '../screens/SignInScreen';
 import { PRIMARY, WHITE } from '../../color';
 import FindIDScreen from '../screens/FindIDScreen';
 import FindPassScreen from '../screens/FindPassScreen';
+import AgreeScreen from '../screens/AgreeScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,11 @@ const AuthStack = () => {
         name="SignIn"
         component={SignInScreen}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Agree"
+        component={AgreeScreen}
+        options={{ title: '' }}
       />
       <Stack.Screen
         name="SignUp"
