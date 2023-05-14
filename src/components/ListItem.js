@@ -1,30 +1,26 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { memo } from 'react';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { BLACK, DANGER, PRIMARY } from '../../colors';
+// import { MaterialCommunityIcons } from '@expo/vector-icons';
+// import { BLACK, PRIMARY } from '../../color';
 
 const ListItem = memo(({ item }) => {
-  const checkboxProps = {
-    name: item.isDone ? 'checkbox-marked' : 'checkbox-blank-outline',
-    color: item.isDone ? PRIMARY.DEFAULT : BLACK,
-    size: 20,
-  };
+  // const checkboxProps = {
+  //   name: item.isDone ? 'checkbox-marked' : 'checkbox-blank-outline',
+  //   color: item.isDone ? PRIMARY.DEFAULT : BLACK,
+  //   size: 20,
+  // };
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => {}} hitSlop={10}>
+      {/* <Pressable onPress={() => {}} hitSlop={10}>
         <MaterialCommunityIcons {...checkboxProps} />
-      </Pressable>
-      <View style={styles.task}>
-        <Text>{item.task}</Text>
+      </Pressable> */}
+      <View style={styles.task1}>
+        <Text style={styles.task1txt}>{item.task[0]}</Text>
       </View>
-      <Pressable onPress={() => {}} hitSlop={10}>
-        <MaterialCommunityIcons
-          name="trash-can"
-          size={20}
-          color={DANGER.DEFAULT}
-        />
-      </Pressable>
+      <View style={styles.task2}>
+        <Text>{item.task[1]}</Text>
+      </View>
     </View>
   );
 });
@@ -34,17 +30,22 @@ ListItem.propTypes = {
 };
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: 'column',
     marginHorizontal: 10,
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingVertical: 15,
-    paddingHorizontal: 20,
+    borderBottomWidth: 1,
+    paddingVertical: 5,
+    paddingHorizontal: 15,
   },
-  task: {
-    flex: 1,
-    marginHorizontal: 10,
+  task1: {
+    marginVertical: 15,
+  },
+  task1txt: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  task2: {
+    alignItems: 'flex-end',
+    marginVertical: 3,
   },
 });
 export default ListItem;
