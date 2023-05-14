@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import ListItem from '../components/ListItem';
 import { GRAY, PRIMARY, WHITE } from '../../color';
 
@@ -43,7 +43,7 @@ const DoubtListScreen = () => {
   ];
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headertxt}>의심 내역</Text>
       </View>
@@ -55,7 +55,7 @@ const DoubtListScreen = () => {
         ListHeaderComponent={View}
         ListHeaderComponentStyle={{ height: 10 }}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
