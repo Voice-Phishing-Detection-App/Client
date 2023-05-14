@@ -2,8 +2,9 @@ import { Pressable } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
+import { BLACK, PRIMARY } from '../../color';
 
-const HeaderRightButton = ({ tintColor }) => {
+const HeaderRightButton = () => {
   const navigation = useNavigation();
   return (
     <Pressable
@@ -12,8 +13,9 @@ const HeaderRightButton = ({ tintColor }) => {
         navigation.navigate('Doubt');
       }}
       hitSlop={10}
+      style={{ marginRight: 15 }}
     >
-      <MaterialCommunityIcons name="bell-outline" size={20} color={tintColor} />
+      <MaterialCommunityIcons name="bell-outline" size={20} color={BLACK} />
     </Pressable>
   );
 };

@@ -1,10 +1,14 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeScreen from '../screens/HomeScreen';
-import { PRIMARY } from '../../color';
+import { PRIMARY, WHITE } from '../../color';
 import HeaderRightButton from '../components/HeaderRightButton';
 import HeaderLeftButton from '../components/HeaderLeftButton';
-
+import {
+  AntDesign,
+  Ionicons,
+  MaterialIcons,
+  Feather,
+} from '@expo/vector-icons';
 const Tab = createBottomTabNavigator();
 
 const MainStack = () => {
@@ -13,7 +17,6 @@ const MainStack = () => {
       initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: PRIMARY.DEFAULT,
-        contentStyle: { backgroundColor: '#fff' },
         headerTitleAlign: 'center',
         headerTintColor: PRIMARY.DEFAULT,
         headerTitleStyle: { fontWeight: '700' },
@@ -23,33 +26,44 @@ const MainStack = () => {
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: '홈',
           title: '피노키오',
           headerRight: HeaderRightButton,
           headerLeft: HeaderLeftButton,
+
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+            <AntDesign name="home" color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="Notifications"
-        component={HomeScreen}
+        name="Search"
+        component={HomeScreen} //임시
         options={{
-          tabBarLabel: 'Updates',
+          tabBarLabel: '검색',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="bell" color={color} size={size} />
+            <Ionicons name="md-search-sharp" color={color} size={size} />
           ),
-          tabBarBadge: 3,
+          // tabBarBadge: 3, -> 알림 몇개 떠있다 표시하는거임
         }}
       />
       <Tab.Screen
-        name="Profile"
-        component={HomeScreen}
+        name="Report"
+        component={HomeScreen} //임시
         options={{
-          tabBarLabel: 'Profile',
+          tabBarLabel: '신고',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
+            <MaterialIcons name="policy" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="MyPage"
+        component={HomeScreen} //임시
+        options={{
+          tabBarLabel: '내 정보',
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="user" color={color} size={size} />
           ),
         }}
       />

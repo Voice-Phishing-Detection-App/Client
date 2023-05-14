@@ -2,8 +2,9 @@ import { Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
+import { BLACK } from '../../color';
 
-const HeaderRightButton = ({ tintColor }) => {
+const HeaderRightButton = () => {
   const navigation = useNavigation();
   return (
     <Pressable
@@ -12,8 +13,9 @@ const HeaderRightButton = ({ tintColor }) => {
         navigation.navigate('SetUp');
       }}
       hitSlop={10}
+      style={{ marginLeft: 15 }}
     >
-      <Ionicons name="settings-outline" size={20} color={tintColor} />
+      <Ionicons name="settings-outline" size={20} color={BLACK} />
     </Pressable>
   );
 };
