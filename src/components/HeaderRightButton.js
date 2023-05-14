@@ -1,16 +1,16 @@
 import { Pressable } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+// import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import { BLACK, PRIMARY } from '../../color';
 
-const HeaderRightButton = () => {
-  const navigation = useNavigation();
+const HeaderRightButton = ({ navigation }) => {
+  // const navigation = useNavigation();
   return (
     <Pressable
       onPress={() => {
         console.log('bell');
-        navigation.navigate('Doubt');
+        navigation.navigate('DoubtListScreen');
       }}
       hitSlop={10}
       style={{ marginRight: 15 }}

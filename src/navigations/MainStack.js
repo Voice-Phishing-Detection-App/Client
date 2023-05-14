@@ -62,6 +62,7 @@ const MainStack = () => {
         component={HomeScreen} //임시
         options={{
           tabBarLabel: '내 정보',
+
           tabBarIcon: ({ color, size }) => (
             <Feather name="user" color={color} size={size} />
           ),

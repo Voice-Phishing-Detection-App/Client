@@ -1,6 +1,6 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import ListItem from '../components/ListItem';
-import { GRAY } from '../colors';
+import { GRAY } from '../../color';
 
 const Separator = () => {
   return <View style={styles.separator}></View>;
