@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   focusedInput: {
     borderWidth: 2,
-    borderColor: PRIMARY.DEFAULT,
+    borderBottomColor: PRIMARY.DEFAULT,
     color: PRIMARY.DEFAULT,
   },
   hasValueInput: {
