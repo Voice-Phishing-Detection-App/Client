@@ -6,7 +6,11 @@ import { BLACK } from '../../color';
 const IconText = ({ text, name }) => {
   return (
     <View style={styles.container}>
-      <Feather style={{ marginLeft: 30 }} name={name} size={20} />
+      <Feather
+        style={{ marginLeft: 30, paddingTop: 5 }}
+        name={name}
+        size={20}
+      />
       <Text style={[styles.bottomText, { marginLeft: 10 }]}>{text}</Text>
     </View>
   );
