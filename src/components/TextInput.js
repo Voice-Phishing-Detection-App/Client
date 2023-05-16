@@ -29,7 +29,6 @@ const Input = forwardRef(
         >
           {title}
         </Text>
-
         <View>
           <TextInput
             ref={ref}
@@ -37,11 +36,10 @@ const Input = forwardRef(
             value={value}
             style={[
               styles.input,
+              iconName && { paddingLeft: 30 },
               value && styles.hasValueInput,
               isFocused && styles.focusedInput,
             ]}
-            placeholder={placeholder ?? title}
-            placeholderTextColor={GRAY}
             autoCapitalize={'none'}
             autoCorrect={false}
             textContentType={'none'}
@@ -87,7 +85,7 @@ Input.propTypes = {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
     marginVertical: 10,
   },
   title: {
@@ -108,11 +106,11 @@ const styles = StyleSheet.create({
     borderTopColor: WHITE,
     paddingHorizontal: 20,
     height: 42,
-    paddingLeft: 30,
+    paddingLeft: 5,
   },
   focusedInput: {
     borderWidth: 2,
-    borderColor: PRIMARY.DEFAULT,
+    borderBottomColor: PRIMARY.DEFAULT,
     color: PRIMARY.DEFAULT,
   },
   hasValueInput: {

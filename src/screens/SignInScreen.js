@@ -42,7 +42,6 @@ const SignInScreen = ({ navigation }) => {
           value={email}
           onChangeText={(text) => setEmail(text.trim())}
           title={'아이디'}
-          placeholder=""
           returnKeyType={ReturnKeyTypes.NEXT}
           iconName={IconNames.EMAIL}
           onSubmitEditing={() => passwordRef.current.focus()}
@@ -52,7 +51,6 @@ const SignInScreen = ({ navigation }) => {
           value={password}
           onChangeText={(text) => setPassword(text.trim())}
           title={'비밀번호'}
-          placeholder=""
           secureTextEntry
           iconName={IconNames.PASSWORD}
           onSubmitEditing={onSubmit}
@@ -104,9 +102,9 @@ const SignInScreen = ({ navigation }) => {
   );
 };
 
-// SignInScreen.propTypes = {
-//   navigation: PropTypes.object,
-// };
+SignInScreen.propTypes = {
+  navigation: PropTypes.object,
+};
 
 const styles = StyleSheet.create({
   container: {
