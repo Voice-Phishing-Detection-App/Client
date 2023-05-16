@@ -1,15 +1,37 @@
-import { View, StyleSheet, Text, Pressable } from 'react-native';
-import { BLACK, PRIMARY, WHITE } from '../../color';
+import { View, StyleSheet, Text } from 'react-native';
+import { PRIMARY, WHITE } from '../../color';
 import { useState } from 'react';
 import IconText from '../components/IconText';
 
 const AgreeScreen = () => {
-  const [check, setCheck] = useState('false');
+  const [agreedAll, setAgreedAll] = useState(false);
+  const [service, setSerivce] = useState(false);
+  const [agree, setAgree] = useState(false);
 
-  const circle = {
-    name: !check ? 'check-circle' : 'circle',
-    color: BLACK,
-    size: 28,
+  const handleAgreeAll = () => {
+    if (agreedAll === true) {
+      setAgreedAll(false);
+      setSerivce(true);
+      setAgree(true);
+    } else if (agreedAll === false) {
+      setAgreedAll(true);
+      setSerivce(false);
+      setAgree(false);
+    }
+  };
+
+  const handleService = () => {
+    setSerivce(!service);
+    if (!service) {
+      setAgreedAll(false);
+    }
+  };
+
+  const handleAgree = () => {
+    setAgree(!agree);
+    if (!agree) {
+      setAgreedAll(false);
+    }
   };
 
   return (
@@ -20,30 +42,21 @@ const AgreeScreen = () => {
         </Text>
       </View>
       <View style={styles.BottomContainer}>
-        <Pressable
-          onPress={() => {
-            setCheck(!check);
-          }}
-          hitSlop={10}
-        >
-          <IconText {...circle} text={'전체동의'} />
-        </Pressable>
-        <Pressable
-          onPress={() => {
-            setCheck(!check);
-          }}
-          hitSlop={10}
-        >
-          <IconText {...circle} text={'이용약관 동의(필수)'} />
-        </Pressable>
-        <Pressable
-          onPress={() => {
-            setCheck(!check);
-          }}
-          hitSlop={10}
-        >
-          <IconText {...circle} text={'개인정보 수집 및 이용동의(필수)'} />
-        </Pressable>
+        <IconText
+          name={!agreedAll}
+          text={'전체동의'}
+          onPress={handleAgreeAll}
+        />
+        <IconText
+          name={service}
+          text={'이용약관 동의(필수)'}
+          onPress={handleService}
+        />
+        <IconText
+          name={agree}
+          text={'개인정보 수집 및 이용동의(필수)'}
+          onPress={handleAgree}
+        />
       </View>
     </View>
   );

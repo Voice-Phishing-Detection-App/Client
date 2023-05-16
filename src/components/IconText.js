@@ -1,18 +1,20 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Feather } from '@expo/vector-icons';
 import { BLACK } from '../../color';
 
-const IconText = ({ text, name }) => {
+const IconText = ({ text, name, onPress }) => {
   return (
-    <View style={styles.container}>
-      <Feather
-        style={{ marginLeft: 30, paddingTop: 5 }}
-        name={name}
-        size={20}
-      />
-      <Text style={[styles.bottomText, { marginLeft: 10 }]}>{text}</Text>
-    </View>
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.container}>
+        <Feather
+          style={{ marginLeft: 30, paddingTop: 5 }}
+          name={name ? 'circle' : 'check-circle'}
+          size={20}
+        />
+        <Text style={styles.bottomText}>{text}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -31,6 +33,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '500',
     marginBottom: 20,
+    marginLeft: 10,
   },
 });
 
