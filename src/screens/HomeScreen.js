@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { BLACK, GRAY, PRIMARY, WHITE } from '../../color';
+import { BLACK, GRAY, PRIMARY, SBTN, WHITE } from '../../color';
 import { Image } from 'react-native';
 import Balloon from 'react-native-balloon';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   },
   containertop: {
     flex: 0.8,
-    backgroundColor: PRIMARY.LIGHT, //더 밝은 색깔 필요!
+    backgroundColor: SBTN.DEFAULT,
   },
   containerbottom: {
     flexDirection: 'row',
