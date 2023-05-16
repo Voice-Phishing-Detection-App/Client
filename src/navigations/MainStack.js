@@ -9,7 +9,9 @@ import {
   MaterialIcons,
   Feather,
 } from '@expo/vector-icons';
+// import DoubtListScreen from '../screens/DoubtListScreen';
 const Tab = createBottomTabNavigator();
+// const Stack = createNativeStackNavigator();
 
 const MainStack = () => {
   return (
@@ -20,6 +22,8 @@ const MainStack = () => {
         headerTitleAlign: 'center',
         headerTintColor: PRIMARY.DEFAULT,
         headerTitleStyle: { fontWeight: '700' },
+        headerRight: HeaderRightButton,
+        headerLeft: HeaderLeftButton,
       }}
     >
       <Tab.Screen
@@ -28,8 +32,6 @@ const MainStack = () => {
         options={{
           tabBarLabel: '홈',
           title: '피노키오',
-          headerRight: HeaderRightButton,
-          headerLeft: HeaderLeftButton,
 
           tabBarIcon: ({ color, size }) => (
             <AntDesign name="home" color={color} size={size} />
@@ -68,6 +70,11 @@ const MainStack = () => {
           ),
         }}
       />
+      {/* <Stack.Screen
+        name="Doubt"
+        component={DoubtListScreen}
+        options={{ title: 'Doubt List' }}
+      /> */}
     </Tab.Navigator>
   );
 };
