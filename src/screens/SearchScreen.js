@@ -1,35 +1,68 @@
-import { StyleSheet, Text, View } from 'react-native';
-import TextInput, { IconNames, ReturnKeyTypes } from '../components/TextInput';
-import PropTypes from 'prop-types';
-import { GRAY, PRIMARY, WHITE } from '../../color';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { BLACK, GRAY, PRIMARY, SBTN, WHITE } from '../../color';
 import { AntDesign } from '@expo/vector-icons';
+import { useState } from 'react';
+import Sbtn from '../components/Sbtn';
+import ReportList from '../components/ReportList';
 
 const Left = 30;
 
 const SearchScreen = () => {
+  const [isFocused, setIsFocused] = useState(false);
+  const [phoneValue, setPhoneValue] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('01012345678'); // 실제 통신할때는 ''로 설정 -> ''일때는 신고정보 안보임
+  const [count, setCount] = useState('123');
+  const [reason, setReason] = useState('안수진 바보');
+
   return (
     <View style={styles.container}>
       <View style={[styles.top, { backgroundColor: PRIMARY.DEFAULT }]}>
         <Text style={styles.title}>번호 조회</Text>
-        <TextInput style={{ backgroundColor: WHITE }} />
-        {/* <View>
-          <TextInput style={styles.search} placeholder="전화번호 입력" />
+        <View style={{ flexDirection: 'row' }}>
+          <TextInput
+            style={styles.search}
+            value={phoneValue}
+            onChangeText={setPhoneValue}
+            placeholder="전화번호 입력"
+            onBlur={() => setIsFocused(false)}
+            onFocus={() => setIsFocused(true)}
+          />
           <View style={styles.icon}>
-            <AntDesign name="search1" size={20} color={GRAY} />
+            <AntDesign
+              name="search1"
+              size={20}
+              color={(() => {
+                switch (true) {
+                  case isFocused:
+                    return BLACK;
+                  case !!phoneValue: {
+                    return BLACK;
+                  }
+                  default:
+                    return GRAY;
+                }
+              })()}
+            />
           </View>
-        </View> */}
+          <Sbtn styles2={style2} title={'조회'} onPress={() => {}} />
+        </View>
       </View>
       <View style={styles.middle}>
         <Text style={styles.middletext}>신고 정보</Text>
       </View>
-      <View style={styles.bottom}></View>
+      <View style={styles.bottom}>
+        <ReportList list={'전화번호'} item={phoneNumber} />
+        <ReportList list={'횟수'} item={count} />
+        <ReportList list={'사유'} item={reason} />
+      </View>
     </View>
   );
 };
 
-SearchScreen.propTypes = {
-  //PropTypes
-};
+const style2 = StyleSheet.create({
+  container: { width: 50, height: 50, marginLeft: 13, borderRadius: 5 },
+  title: { fontSize: 12, fontWeight: '600' },
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -54,21 +87,22 @@ const styles = StyleSheet.create({
   },
   search: {
     backgroundColor: WHITE,
-    width: 300,
+    width: '70%',
     height: 50,
     borderRadius: 5,
-    marginLeft: '10%',
-  },
-  middletext: {
-    fontSize: 20,
-    fontWeight: '500',
     marginLeft: Left,
+    paddingLeft: 40,
   },
   icon: {
     position: 'absolute',
     height: '100%',
     justifyContent: 'center',
     marginLeft: Left + 10,
+  },
+  middletext: {
+    fontSize: 20,
+    fontWeight: '600',
+    marginLeft: Left,
   },
 });
 

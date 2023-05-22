@@ -2,7 +2,7 @@ import { Pressable, Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { BLACK, SBTN } from '../../color';
 
-const Sbtn = ({ title, onPress }) => {
+const Sbtn = ({ title, onPress, styles2 }) => {
   return (
     <Pressable
       onPress={onPress}
@@ -10,9 +10,10 @@ const Sbtn = ({ title, onPress }) => {
         styles.container,
         { backgroundColor: SBTN.DEFAULT },
         pressed && { backgroundColor: SBTN.DARK },
+        styles2?.container,
       ]}
     >
-      <Text style={styles.title}>{title}</Text>
+      <Text style={[styles.title, styles2?.title]}>{title}</Text>
     </Pressable>
   );
 };
