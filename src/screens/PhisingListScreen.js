@@ -1,7 +1,6 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import ListItem from '../components/ListItem';
-import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   container: {
@@ -9,8 +8,7 @@ const styles = StyleSheet.create({
   },
 });
 const PhisingListScreen = () => {
-  const navigation = useNavigation();
-  const todos = [
+  const List = [
     {
       id: 1,
       task: [
@@ -51,21 +49,14 @@ const PhisingListScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Pressable
-        onPress={() => {
-          navigation.navigate('EmergencyNumber');
-        }}
-        hitSlop={10}
-      >
-        <FlatList
-          data={todos}
-          renderItem={({ item }) => <ListItem item={item} />}
-          windowSize={5}
-          // ListHeaderComponent={() => <View style={{ height: 10 }}></View>}
-          ListHeaderComponent={View}
-          ListHeaderComponentStyle={{ height: 10 }}
-        />
-      </Pressable>
+      <FlatList
+        data={List}
+        renderItem={({ item }) => <ListItem name="PhisingList" item={item} />}
+        windowSize={5}
+        // ListHeaderComponent={() => <View style={{ height: 10 }}></View>}
+        ListHeaderComponent={View}
+        ListHeaderComponentStyle={{ height: 10 }}
+      />
     </SafeAreaView>
   );
 };

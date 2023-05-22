@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   },
 });
 const DoubtListScreen = () => {
-  const Lists = [
+  const List = [
     {
       id: 1,
       task: ['2023-05-15 오후 7:33 통화내역', '2023-05-15'],
@@ -34,7 +34,7 @@ const DoubtListScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={Lists}
+        data={List}
         renderItem={({ item }) => <ListItem item={item} />}
         windowSize={5}
         // ListHeaderComponent={() => <View style={{ height: 10 }}></View>}
