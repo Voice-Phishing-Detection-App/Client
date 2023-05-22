@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { memo } from 'react';
 // import { MaterialCommunityIcons } from '@expo/vector-icons';
-// import { BLACK, PRIMARY } from '../../color';
+// import { GRAY } from '../../color';
 
 const ListItem = memo(({ item }) => {
   // const checkboxProps = {

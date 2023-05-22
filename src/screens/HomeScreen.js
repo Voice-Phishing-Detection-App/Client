@@ -4,8 +4,10 @@ import { BLACK, GRAY, PRIMARY, SBTN, WHITE } from '../../color';
 import { Image } from 'react-native';
 import Balloon from 'react-native-balloon';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       {/* <Text style={styles.balloon}>HomeScreen</Text> */}
@@ -38,7 +40,7 @@ const HomeScreen = () => {
         <View>
           <Pressable
             onPress={() => {
-              console.log('피싱도움');
+              navigation.navigate('CenterList');
             }}
             hitSlop={10}
             style={styles.button}
@@ -54,7 +56,7 @@ const HomeScreen = () => {
         <View>
           <Pressable
             onPress={() => {
-              console.log('피싱도움');
+              navigation.navigate('PhisingList');
             }}
             hitSlop={10}
             style={styles.button}
@@ -70,7 +72,7 @@ const HomeScreen = () => {
         <View>
           <Pressable
             onPress={() => {
-              console.log('긴급 연락처');
+              navigation.navigate('EmergencyNumber');
             }}
             hitSlop={10}
             style={styles.button}
@@ -82,7 +84,7 @@ const HomeScreen = () => {
         <View>
           <Pressable
             onPress={() => {
-              console.log('신고 기록');
+              navigation.navigate('ReportList');
             }}
             hitSlop={10}
             style={styles.button}
