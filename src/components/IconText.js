@@ -5,15 +5,13 @@ import { BLACK } from '../../color';
 
 const IconText = ({ text, name, onPress }) => {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View style={styles.container}>
-        <Feather
-          style={{ marginLeft: 30 }}
-          name={name ? 'circle' : 'check-circle'}
-          size={20}
-        />
-        <Text style={styles.bottomText}>{text}</Text>
-      </View>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Feather
+        style={{ marginLeft: 30 }}
+        name={name ? 'circle' : 'check-circle'}
+        size={20}
+      />
+      <Text style={styles.bottomText}>{text}</Text>
     </TouchableOpacity>
   );
 };
@@ -26,13 +24,14 @@ IconText.propTypes = {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginTop: 30,
+    alignItems: 'center',
+    marginTop: 20,
+    marginBottom: 20,
   },
   bottomText: {
     color: BLACK,
     fontSize: 20,
     fontWeight: '500',
-    marginBottom: 20,
     marginLeft: 10,
   },
 });
