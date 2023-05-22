@@ -7,26 +7,26 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-const DoubtListScreen = () => {
+const CenterListScreen = () => {
   const List = [
     {
       id: 1,
-      task: ['2023-05-15 오후 7:33 통화내역', '2023-05-15'],
+      task: ['예주 은행', '010-0000-0000'],
       isDone: false,
     },
     {
       id: 2,
-      task: ['2023-05-15 오후 7:33 통화내역', '2023-05-15'],
+      task: ['예주 은행', '010-0000-0000'],
       isDone: true,
     },
     {
       id: 3,
-      task: ['2023-05-15 오후 7:33 통화내역', '2023-05-15'],
+      task: ['예주 은행', '010-0000-0000'],
       isDone: false,
     },
     {
       id: 4,
-      task: ['2023-05-15 오후 7:33 통화내역', '2023-05-15'],
+      task: ['예주 은행', '010-0000-0000'],
       isDone: true,
     },
   ];
@@ -45,4 +45,4 @@ const DoubtListScreen = () => {
   );
 };
 
-export default DoubtListScreen;
+export default CenterListScreen;

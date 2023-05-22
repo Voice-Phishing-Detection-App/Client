@@ -1,74 +1,145 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/HomeScreen';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { PRIMARY, WHITE } from '../../color';
-import HeaderRightButton from '../components/HeaderRightButton';
 import HeaderLeftButton from '../components/HeaderLeftButton';
-import {
-  AntDesign,
-  Ionicons,
-  MaterialIcons,
-  Feather,
-} from '@expo/vector-icons';
-const Tab = createBottomTabNavigator();
-
+import HeaderRightButton from '../components/HeaderRightButton';
+import BottomStack from './BottomStack';
+import SetUpScreen from '../screens/SetUpScreen';
+import DoubtListScreen from '../screens/DoubtListScreen';
+import PhisingListScreen from '../screens/PhisingListScreen';
+import CenterListScreen from '../screens/CenterListScreen';
+import EmergencyNumberScreen from '../screens/EmergencyNumberScreen';
+import ReportListScreen from '../screens/ReportListScreen';
+import ReportListDetailScreen from '../screens/ReportListDetailScreen';
+import PhisingListDetailScreen from '../screens/PhisingListDetailScreen';
+const Stack = createNativeStackNavigator();
+//로그인 후 컴포넌트
 const MainStack = () => {
   return (
-    <Tab.Navigator
-      initialRouteName="Home"
+    <Stack.Navigator
+      initialRouteName="BottomHome"
       screenOptions={{
-        tabBarActiveTintColor: PRIMARY.DEFAULT,
+        contentStyle: { backgroundColor: WHITE },
+
         headerTitleAlign: 'center',
         headerTintColor: PRIMARY.DEFAULT,
         headerTitleStyle: { fontWeight: '700' },
+        headerBackTitleVisible: false,
       }}
     >
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
+      <Stack.Screen
+        name="BottomHome"
+        component={BottomStack}
         options={{
-          tabBarLabel: '홈',
-          title: '피노키오',
           headerRight: HeaderRightButton,
           headerLeft: HeaderLeftButton,
+        }}
+      />
+      {/*nameprops -> 대문자 선호 */}
+      <Stack.Screen
+        name="SetUp"
+        component={SetUpScreen}
+        options={{ title: '알림' }}
+      />
+      <Stack.Screen
+        name="Doubt"
+        component={DoubtListScreen}
+        options={{
+          title: '의심 내역',
+          headerStyle: {
+            backgroundColor: PRIMARY.DEFAULT,
+          },
+          headerTintColor: WHITE,
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      />
 
-          tabBarIcon: ({ color, size }) => (
-            <AntDesign name="home" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Search"
-        component={HomeScreen} //임시
+      <Stack.Screen
+        name="CenterList"
+        component={CenterListScreen}
         options={{
-          tabBarLabel: '검색',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="md-search-sharp" color={color} size={size} />
-          ),
-          // tabBarBadge: 3, -> 알림 몇개 떠있다 표시하는거임
+          title: '피싱 도움',
+          headerStyle: {
+            backgroundColor: PRIMARY.DEFAULT,
+          },
+          headerTintColor: WHITE,
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
         }}
       />
-      <Tab.Screen
-        name="Report"
-        component={HomeScreen} //임시
+      <Stack.Screen
+        name="PhisingList"
+        component={PhisingListScreen}
         options={{
-          tabBarLabel: '신고',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="policy" color={color} size={size} />
-          ),
+          title: '피해 사례',
+          headerStyle: {
+            backgroundColor: PRIMARY.DEFAULT,
+          },
+          headerTintColor: WHITE,
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
         }}
       />
-      <Tab.Screen
-        name="MyPage"
-        component={HomeScreen} //임시
+      <Stack.Screen
+        name="PhisingListDetail"
+        component={PhisingListDetailScreen}
         options={{
-          tabBarLabel: '내 정보',
-
-          tabBarIcon: ({ color, size }) => (
-            <Feather name="user" color={color} size={size} />
-          ),
+          title: '피해 사례',
+          headerStyle: {
+            backgroundColor: PRIMARY.DEFAULT,
+          },
+          headerTintColor: WHITE,
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
         }}
       />
-    </Tab.Navigator>
+      <Stack.Screen
+        name="EmergencyNumber"
+        component={EmergencyNumberScreen}
+        options={{
+          title: '긴급 연락처',
+          headerStyle: {
+            backgroundColor: PRIMARY.DEFAULT,
+          },
+          headerTintColor: WHITE,
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="ReportList"
+        component={ReportListScreen}
+        options={{
+          title: '신고 기록',
+          headerStyle: {
+            backgroundColor: PRIMARY.DEFAULT,
+          },
+          headerTintColor: WHITE,
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="ReportListDetail"
+        component={ReportListDetailScreen}
+        options={{
+          title: '신고 기록',
+          headerStyle: {
+            backgroundColor: PRIMARY.DEFAULT,
+          },
+          headerTintColor: WHITE,
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      />
+    </Stack.Navigator>
   );
 };
 export default MainStack;

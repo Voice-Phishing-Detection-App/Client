@@ -1,11 +1,13 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { BLACK, GRAY, PRIMARY, WHITE } from '../../color';
+import { BLACK, GRAY, PRIMARY, SBTN, WHITE } from '../../color';
 import { Image } from 'react-native';
 import Balloon from 'react-native-balloon';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       {/* <Text style={styles.balloon}>HomeScreen</Text> */}
@@ -28,7 +30,7 @@ const HomeScreen = () => {
             width={160}
             // onPress={() => console.log('press')}
           >
-            <Text style={{ fontSize: 15 }}>
+            <Text style={{ fontSize: 14 }}>
               문예주님 안녕하세요.{'\n'}오늘 총 신고 기록은{'\n'}3번 있어요
             </Text>
           </Balloon>
@@ -38,7 +40,7 @@ const HomeScreen = () => {
         <View>
           <Pressable
             onPress={() => {
-              console.log('피싱도움');
+              navigation.navigate('CenterList');
             }}
             hitSlop={10}
             style={styles.button}
@@ -54,7 +56,7 @@ const HomeScreen = () => {
         <View>
           <Pressable
             onPress={() => {
-              console.log('피싱도움');
+              navigation.navigate('PhisingList');
             }}
             hitSlop={10}
             style={styles.button}
@@ -70,7 +72,7 @@ const HomeScreen = () => {
         <View>
           <Pressable
             onPress={() => {
-              console.log('긴급 연락처');
+              navigation.navigate('EmergencyNumber');
             }}
             hitSlop={10}
             style={styles.button}
@@ -82,7 +84,7 @@ const HomeScreen = () => {
         <View>
           <Pressable
             onPress={() => {
-              console.log('신고 기록');
+              navigation.navigate('ReportList');
             }}
             hitSlop={10}
             style={styles.button}
@@ -105,15 +107,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   containertop: {
-    flex: 0.8,
-    backgroundColor: PRIMARY.LIGHT, //더 밝은 색깔 필요!
+    flex: 1,
+    backgroundColor: SBTN.DEFAULT,
   },
   containerbottom: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     paddingTop: 40,
     paddingHorizontal: 20,
-    flex: 2.2,
+    flex: 2,
     backgroundColor: WHITE,
   },
   // title: {
