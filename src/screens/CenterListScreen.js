@@ -35,7 +35,7 @@ const CenterListScreen = () => {
     <SafeAreaView style={styles.container}>
       <FlatList
         data={List}
-        renderItem={({ item }) => <ListItem item={item} />}
+        renderItem={({ item }) => <ListItem name="CenterList" item={item} />}
         windowSize={5}
         // ListHeaderComponent={() => <View style={{ height: 10 }}></View>}
         ListHeaderComponent={View}

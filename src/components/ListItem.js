@@ -18,22 +18,36 @@ const ListItem = memo(({ name, item }) => {
       }}
       hitSlop={10}
     >
-      <View style={styles.container}>
-        {/* <Pressable onPress={() => {}} hitSlop={10}>
+      {/* <Pressable onPress={() => {}} hitSlop={10}>
         <MaterialCommunityIcons {...checkboxProps} />
       </Pressable> */}
-        <View style={styles.task1}>
-          <Text style={styles.task1txt}>{item.task[0]}</Text>
+      {name === 'CenterList' ? (
+        <View style={styles.container}>
+          <View style={styles.centerlist}>
+            <Text style={styles.task1txt}>{item.task[0]}</Text>
+
+            <Text style={styles.task1txt}>{item.task[1]}</Text>
+          </View>
         </View>
-        <View style={styles.task2}>
-          <Text>{item.task[1]}</Text>
+      ) : (
+        <View style={styles.container}>
+          <View style={styles.task1}>
+            <Text style={styles.task1txt}>{item.task[0]}</Text>
+          </View>
+          <View style={styles.task2}>
+            <Text>{item.task[1]}</Text>
+          </View>
         </View>
-      </View>
+      )}
     </Pressable>
   );
 });
 ListItem.displayName = 'ListItem';
+ListItem.defaultProps = {
+  name: 'default',
+};
 ListItem.propTypes = {
+  name: PropTypes.object.isRequired,
   item: PropTypes.object.isRequired,
 };
 const styles = StyleSheet.create({
@@ -54,6 +68,9 @@ const styles = StyleSheet.create({
   task2: {
     alignItems: 'flex-end',
     marginVertical: 3,
+  },
+  centerlist: {
+    marginVertical: 10,
   },
 });
 export default ListItem;
