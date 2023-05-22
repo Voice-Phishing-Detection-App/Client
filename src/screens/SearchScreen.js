@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
   },
   bottom: {
     flex: 2,
+    backgroundColor: WHITE,
   },
   title: {
     fontSize: 30,
