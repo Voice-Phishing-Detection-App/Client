@@ -12,22 +12,18 @@ const CenterListScreen = () => {
     {
       id: 1,
       task: ['예주 은행', '010-0000-0000'],
-      isDone: false,
     },
     {
       id: 2,
       task: ['예주 은행', '010-0000-0000'],
-      isDone: true,
     },
     {
       id: 3,
       task: ['예주 은행', '010-0000-0000'],
-      isDone: false,
     },
     {
       id: 4,
       task: ['예주 은행', '010-0000-0000'],
-      isDone: true,
     },
   ];
 
