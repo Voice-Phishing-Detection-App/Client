@@ -16,7 +16,6 @@ const PhisingListScreen = () => {
         '2023-05-15',
         'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
       ],
-      isDone: false,
     },
     {
       id: 2,
@@ -25,7 +24,6 @@ const PhisingListScreen = () => {
         '2023-05-15',
         'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
       ],
-      isDone: true,
     },
     {
       id: 3,
@@ -34,7 +32,6 @@ const PhisingListScreen = () => {
         '2023-05-15',
         'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
       ],
-      isDone: false,
     },
     {
       id: 4,
@@ -43,7 +40,6 @@ const PhisingListScreen = () => {
         '2023-05-15',
         'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
       ],
-      isDone: true,
     },
   ];
 
