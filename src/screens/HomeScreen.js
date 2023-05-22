@@ -30,7 +30,7 @@ const HomeScreen = () => {
             width={160}
             // onPress={() => console.log('press')}
           >
-            <Text style={{ fontSize: 15 }}>
+            <Text style={{ fontSize: 14 }}>
               문예주님 안녕하세요.{'\n'}오늘 총 신고 기록은{'\n'}3번 있어요
             </Text>
           </Balloon>
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   containertop: {
-    flex: 0.8,
+    flex: 1,
     backgroundColor: SBTN.DEFAULT,
   },
   containerbottom: {
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     paddingTop: 40,
     paddingHorizontal: 20,
-    flex: 2.2,
+    flex: 2,
     backgroundColor: WHITE,
   },
   // title: {

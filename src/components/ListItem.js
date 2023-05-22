@@ -8,10 +8,12 @@ const ListItem = memo(({ name, item }) => {
   return (
     <Pressable
       onPress={() => {
-        if (name == 'PhisingList') {
-          navigation.navigate('PhisingListDetail');
-        } else {
-          navigation.navigate('EmergencyNumber');
+        if (name === 'PhisingList') {
+          navigation.navigate('PhisingListDetail', {
+            title: item.task[0],
+            date: item.task[1],
+            detail: item.task[2],
+          });
         }
       }}
       hitSlop={10}
