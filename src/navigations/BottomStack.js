@@ -9,6 +9,8 @@ import {
   MaterialIcons,
   Feather,
 } from '@expo/vector-icons';
+import SearchScreen from '../screens/SearchScreen';
+import ReportScreen from '../screens/ReportScreen';
 // import DoubtListScreen from '../screens/DoubtListScreen';
 const Tab = createBottomTabNavigator();
 // const Stack = createNativeStackNavigator();
@@ -36,7 +38,7 @@ const BottomStack = () => {
       />
       <Tab.Screen
         name="Search"
-        component={HomeScreen} //임시
+        component={SearchScreen} //임시
         options={{
           tabBarLabel: '검색',
           tabBarIcon: ({ color, size }) => (
@@ -47,7 +49,7 @@ const BottomStack = () => {
       />
       <Tab.Screen
         name="Report"
-        component={HomeScreen} //임시
+        component={ReportScreen} //임시
         options={{
           tabBarLabel: '신고',
           tabBarIcon: ({ color, size }) => (

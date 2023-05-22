@@ -19,7 +19,6 @@ const MainStack = () => {
       initialRouteName="BottomHome"
       screenOptions={{
         contentStyle: { backgroundColor: WHITE },
-
         headerTitleAlign: 'center',
         headerTintColor: PRIMARY.DEFAULT,
         headerTitleStyle: { fontWeight: '700' },
