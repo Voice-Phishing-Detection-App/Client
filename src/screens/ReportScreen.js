@@ -1,9 +1,10 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, TextInput, View, ScrollView } from 'react-native';
 import ReportBox from '../components/ReportBox';
 import { useState } from 'react';
 import IconText from '../components/IconText';
 import { Picker } from '@react-native-picker/picker';
-import { GRAY } from '../../color';
+import { GRAY, PRIMARY, WHITE } from '../../color';
+import Sbtn from '../components/Sbtn';
 
 const ReportScreen = () => {
   const [select, setSelect] = useState(true);
@@ -20,7 +21,7 @@ const ReportScreen = () => {
   const [report, setReport] = useState('');
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <ReportBox text="통화 후 의심 판정 여부" />
       <View style={{ flexDirection: 'row' }}>
         <IconText
@@ -80,9 +81,23 @@ const ReportScreen = () => {
           placeholder="자유롭게 적어주세요"
         />
       </View>
-    </View>
+      <Sbtn styles2={style2} title="신고" onPress={() => {}} />
+    </ScrollView>
   );
 };
+
+const style2 = StyleSheet.create({
+  container: {
+    backgroundColor: PRIMARY.DARK,
+    width: 70,
+    height: 40,
+    marginLeft: '75%',
+  },
+  title: {
+    color: WHITE,
+    fontSize: 13,
+  },
+});
 
 const styles = StyleSheet.create({
   container: {
