@@ -38,7 +38,7 @@ const BottomStack = () => {
       />
       <Tab.Screen
         name="Search"
-        component={SearchScreen} //임시
+        component={SearchScreen}
         options={{
           tabBarLabel: '검색',
           tabBarIcon: ({ color, size }) => (
@@ -49,7 +49,7 @@ const BottomStack = () => {
       />
       <Tab.Screen
         name="Report"
-        component={ReportScreen} //임시
+        component={ReportScreen}
         options={{
           tabBarLabel: '신고',
           tabBarIcon: ({ color, size }) => (
