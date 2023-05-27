@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   middle: {
-    flex: 0.2,
+    flex: 0.3,
     backgroundColor: PRIMARY.LIGHT,
     justifyContent: 'center',
   },
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: WHITE,
   },
   title: {
-    fontSize: 30,
+    fontSize: 23,
     color: WHITE,
     fontWeight: '700',
     padding: Left,
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     marginLeft: Left + 10,
   },
   middletext: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '600',
     marginLeft: Left,
   },

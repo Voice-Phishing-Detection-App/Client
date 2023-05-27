@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
     backgroundColor: PRIMARY.LIGHT,
   },
   text: {
-    fontSize: 20,
-    fontWeight: '500',
+    fontSize: 17,
+    fontWeight: '600',
     marginLeft: 30,
   },
 });
