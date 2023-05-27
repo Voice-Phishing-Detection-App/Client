@@ -9,6 +9,7 @@ import {
   MaterialIcons,
   Feather,
 } from '@expo/vector-icons';
+import MyPageScreen from '../screens/MyPageScreen';
 // import DoubtListScreen from '../screens/DoubtListScreen';
 const Tab = createBottomTabNavigator();
 // const Stack = createNativeStackNavigator();
@@ -22,13 +23,15 @@ const BottomStack = () => {
         headerTitleAlign: 'center',
         headerTintColor: PRIMARY.DEFAULT,
         headerTitleStyle: { fontWeight: '700' },
-        headerShown: false,
       }}
     >
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{
+          title: '피노키오',
+          headerRight: HeaderRightButton,
+          headerLeft: HeaderLeftButton,
           tabBarIcon: ({ color, size }) => (
             <AntDesign name="home" color={color} size={size} />
           ),
@@ -57,10 +60,14 @@ const BottomStack = () => {
       />
       <Tab.Screen
         name="MyPage"
-        component={HomeScreen} //임시
+        component={MyPageScreen}
         options={{
           tabBarLabel: '내 정보',
-
+          title: '내 정보',
+          headerStyle: {
+            backgroundColor: PRIMARY.DEFAULT,
+          },
+          headerTintColor: WHITE,
           tabBarIcon: ({ color, size }) => (
             <Feather name="user" color={color} size={size} />
           ),
