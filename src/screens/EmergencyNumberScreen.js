@@ -27,10 +27,12 @@ const EmergencyNumberScreen = () => {
           <Text>민감도가 높을수록 위험 수치 높을 때 연락</Text>
         </View>
         <View style={{ flexDirection: 'row' }}>
-          <Text style={{ marginLeft: 30, marginBottom: 10 }}>관계</Text>
-          <Text style={{ marginLeft: '40%', marginBottom: 10 }}>민감도</Text>
+          <Text style={{ marginLeft: 30, marginBottom: 5 }}>관계</Text>
+          <Text style={{ marginLeft: '38%', marginBottom: 5 }}>민감도</Text>
         </View>
-        <View style={{ flexDirection: 'row', marginLeft: 10 }}>
+        <View
+          style={{ flexDirection: 'row', marginLeft: 10, marginBottom: 20 }}
+        >
           <TextInput
             value={relation}
             style={styles.input}
@@ -43,23 +45,35 @@ const EmergencyNumberScreen = () => {
             onFocus={() => setIsFocused(true)}
             onChangeText={(text) => setRelation(text.trim())}
           />
-          <Picker
-            style={styles.picker}
-            selectedValue={sensitivity}
-            onValueChange={(itemValue, itemIndex) => setSensitivity(itemValue)}
+          <View
+            style={{
+              backgroundColor: WHITE,
+              marginLeft: 20,
+              borderRadius: 5,
+              borderRightColor: SBTN.DARK,
+              justifyContent: 'center',
+            }}
           >
-            {sensitivityList.map((list, index) => (
-              <Picker.Item key={index} label={list} value={list} />
-            ))}
-          </Picker>
+            <Picker
+              style={styles.picker}
+              selectedValue={sensitivity}
+              onValueChange={(itemValue, itemIndex) =>
+                setSensitivity(itemValue)
+              }
+            >
+              {sensitivityList.map((list, index) => (
+                <Picker.Item key={index} label={list} value={list} />
+              ))}
+            </Picker>
+          </View>
         </View>
         <View>
-          <Text style={{ marginLeft: 30, marginBottom: 10 }}>연락처</Text>
+          <Text style={{ marginLeft: 30, marginBottom: 5 }}>연락처</Text>
         </View>
         <View style={{ flexDirection: 'row', marginLeft: 10 }}>
           <TextInput
             value={phone}
-            style={[styles.input, { width: '60%' }]}
+            style={[styles.input, { width: '65%' }]}
             autoCapitalize={'none'}
             autoCorrect={false}
             textContentType={'none'}
@@ -140,7 +154,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     paddingLeft: 10,
   },
-  picker: { borderColor: WHITE, width: 60 },
+  picker: { borderColor: WHITE, width: 145, height: 30 },
   listContainer: {
     flexDirection: 'row',
     alignItems: 'center',
