@@ -15,9 +15,24 @@ const EmergencyNumberScreen = () => {
   ]);
   const [phone, setPhone] = useState('');
   const [data, setData] = useState([
-    { id: 1, rel: '엄마', number: '010-1234-5678', sens: '3단계' },
-    { id: 2, rel: '아빠', number: '010-1234-6578', sens: '1단계' },
+    { rel: '엄마', number: '010-1234-5678', sens: '3단계' },
+    { rel: '아빠', number: '010-1234-6578', sens: '1단계' },
   ]);
+  const [editBtn, setEditBtn] = useState(false);
+
+  const edit = (item) => {
+    if (editBtn === false) {
+      setEditBtn(true);
+      setRelation(item.rel);
+      setSensitivity(item.sens);
+      setPhone(item.number);
+    } else {
+      setEditBtn(false);
+      setRelation('');
+      setSensitivity(null);
+      setPhone('');
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -90,6 +105,7 @@ const EmergencyNumberScreen = () => {
                 width: 50,
                 height: 40,
               },
+              title: { fontSize: 12 },
             }}
             title={'등록'}
             onPress={() => {}}
@@ -112,7 +128,15 @@ const EmergencyNumberScreen = () => {
               </View>
               <Sbtn
                 styles2={{ title: { fontSize: 12 } }}
-                title={'수정'}
+                title={!editBtn ? '수정' : '취소'}
+                onPress={() => edit(item)}
+              />
+              <Sbtn
+                styles2={{
+                  title: { fontSize: 12 },
+                  container: { backgroundColor: '#92B8E5' },
+                }}
+                title={'삭제'}
                 onPress={() => {}}
               />
             </View>
@@ -160,8 +184,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     marginTop: 50,
-    marginLeft: 15,
-    marginRight: 15,
+    marginLeft: 20,
+    marginRight: 20,
   },
   listback: {
     flexDirection: 'row',
