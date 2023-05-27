@@ -31,7 +31,7 @@ const DoubtListScreen = () => {
     },
   ];
 
-  return (
+  return List.length ? (
     <SafeAreaView style={styles.container}>
       <FlatList
         data={List}
@@ -42,6 +42,8 @@ const DoubtListScreen = () => {
         ListHeaderComponentStyle={{ height: 10 }}
       />
     </SafeAreaView>
+  ) : (
+    <EmptyList />
   );
 };
 
