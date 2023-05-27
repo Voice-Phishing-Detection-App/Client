@@ -15,8 +15,8 @@ const EmergencyNumberScreen = () => {
   ]);
   const [phone, setPhone] = useState('');
   const [data, setData] = useState([
-    { rel: '엄마', number: '010-1234-5678', sens: '3단계' },
-    { rel: '아빠', number: '010-1234-6578', sens: '1단계' },
+    { id: 1, rel: '엄마', number: '010-1234-5678', sens: '3단계' },
+    { id: 2, rel: '아빠', number: '010-1234-6578', sens: '1단계' },
   ]);
 
   return (
@@ -27,10 +27,10 @@ const EmergencyNumberScreen = () => {
           <Text>민감도가 높을수록 위험 수치 높을 때 연락</Text>
         </View>
         <View style={{ flexDirection: 'row' }}>
-          <Text style={{ marginLeft: 20, marginBottom: 10 }}>관계</Text>
+          <Text style={{ marginLeft: 30, marginBottom: 10 }}>관계</Text>
           <Text style={{ marginLeft: '40%', marginBottom: 10 }}>민감도</Text>
         </View>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={{ flexDirection: 'row', marginLeft: 10 }}>
           <TextInput
             value={relation}
             style={styles.input}
@@ -38,6 +38,7 @@ const EmergencyNumberScreen = () => {
             autoCorrect={false}
             textContentType={'none'}
             keyboardAppearance={'light'}
+            borderColor={SBTN.DARK}
             onBlur={() => setIsFocused(false)}
             onFocus={() => setIsFocused(true)}
             onChangeText={(text) => setRelation(text.trim())}
@@ -53,9 +54,9 @@ const EmergencyNumberScreen = () => {
           </Picker>
         </View>
         <View>
-          <Text style={{ marginLeft: 20, marginBottom: 10 }}>연락처</Text>
+          <Text style={{ marginLeft: 30, marginBottom: 10 }}>연락처</Text>
         </View>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={{ flexDirection: 'row', marginLeft: 10 }}>
           <TextInput
             value={phone}
             style={[styles.input, { width: '60%' }]}
@@ -63,6 +64,7 @@ const EmergencyNumberScreen = () => {
             autoCorrect={false}
             textContentType={'none'}
             keyboardAppearance={'light'}
+            borderColor={SBTN.DARK}
             onBlur={() => setIsFocused(false)}
             onFocus={() => setIsFocused(true)}
             onChangeText={(text) => setPhone(text.trim())}
@@ -81,7 +83,7 @@ const EmergencyNumberScreen = () => {
         </View>
       </View>
       <View style={styles.middle}>
-        <Text style={{ fontSize: 15, marginLeft: 20, fontWeight: '500' }}>
+        <Text style={{ fontSize: 15, marginLeft: 30, fontWeight: '500' }}>
           등록된 연락처
         </Text>
       </View>
@@ -90,17 +92,7 @@ const EmergencyNumberScreen = () => {
           {data.map((item, index) => (
             <View style={styles.listContainer} key={index}>
               <Text style={styles.listText}>{item.rel}</Text>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  backgroundColor: '#F7F6F6',
-                  borderRadius: 5,
-                  width: '60%',
-                  height: '100%',
-                  alignItems: 'center',
-                  justifyContent: 'space-evenly',
-                }}
-              >
+              <View style={styles.listback}>
                 <Text style={styles.listText}>{item.number}</Text>
                 <Text style={styles.listText}>{item.sens}</Text>
               </View>
@@ -122,7 +114,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   top: {
-    flex: 0.37,
+    flex: 0.39,
     backgroundColor: PRIMARY.LIGHT,
   },
   middle: {
@@ -156,6 +148,15 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginLeft: 15,
     marginRight: 15,
+  },
+  listback: {
+    flexDirection: 'row',
+    backgroundColor: '#F7F6F6',
+    borderRadius: 5,
+    width: '60%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
   listText: {
     fontSize: 15,
