@@ -9,12 +9,12 @@ const AgreeScreen = () => {
   const [agree, setAgree] = useState(false);
 
   const handleAgreeAll = () => {
-    if (agreedAll === true) {
-      setAgreedAll(false);
+    if (agreedAll === false) {
+      setAgreedAll(true);
       setSerivce(true);
       setAgree(true);
-    } else if (agreedAll === false) {
-      setAgreedAll(true);
+    } else if (agreedAll === true) {
+      setAgreedAll(false);
       setSerivce(false);
       setAgree(false);
     }
@@ -42,11 +42,7 @@ const AgreeScreen = () => {
         </Text>
       </View>
       <View style={styles.BottomContainer}>
-        <IconText
-          name={!agreedAll}
-          text={'전체동의'}
-          onPress={handleAgreeAll}
-        />
+        <IconText name={agreedAll} text={'전체동의'} onPress={handleAgreeAll} />
         <IconText
           name={service}
           text={'이용약관 동의(필수)'}

@@ -8,7 +8,7 @@ const IconText = ({ text, name, onPress }) => {
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Feather
         style={{ marginLeft: 30 }}
-        name={name ? 'circle' : 'check-circle'}
+        name={name ? 'check-circle' : 'circle'}
         size={20}
       />
       <Text style={styles.bottomText}>{text}</Text>
