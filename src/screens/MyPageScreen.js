@@ -1,14 +1,46 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { PRIMARY, WHITE } from '../../color';
+import { GRAY, PRIMARY, WHITE } from '../../color';
 import { useNavigation } from '@react-navigation/native';
+import Sbtn from '../components/Sbtn';
+import AppModal from '../components/AppModal';
+import { useState } from 'react';
 
 const MyPageScreen = () => {
+  const user = '신혜민';
+  const password = '1234';
+  const pwdLen = password.length;
+  const phonenumber = '01000000000';
+  const hiddentxt = '*';
+  const blank = '     ';
+
   const navigation = useNavigation();
+  const [modalVisible, setModalVisible] = useState(false); // 모달의 가시성을 제어하는 상태 변수 선언
+
+  const toggleModal = () => {
+    setModalVisible(!modalVisible); // 모달 가시성 토글 함수 정의
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.containerTop}>
-        <Text>MyPageScreen</Text>
+        <Text style={styles.title}>로그인 정보</Text>
+        <View style={styles.containerInfo}>
+          <Text style={styles.loginInfo}>이름</Text>
+          <Text style={styles.loginInfo}>{user}</Text>
+          <Text style={styles.loginInfo}>{blank}</Text>
+        </View>
+        <View style={styles.containerInfo}>
+          <Text style={styles.loginInfo}>비밀번호</Text>
+          <Text style={styles.loginInfo}>{password}</Text>
+          <Sbtn title={'변경'} onPress={toggleModal} />
+        </View>
+
+        <View style={styles.containerInfo}>
+          <Text style={styles.loginInfo}>연락처</Text>
+          <Text style={styles.loginInfo}>{phonenumber}</Text>
+          <Sbtn title={'변경'} onPress={toggleModal} />
+        </View>
       </View>
       <View style={styles.containerMiddle}>
         <Pressable
@@ -55,6 +87,9 @@ const MyPageScreen = () => {
       <View style={styles.containerBottom}>
         <Text>로그인 연동 API</Text>
       </View>
+      <View>
+        <AppModal modalVisible={modalVisible} toggleModal={toggleModal} />
+      </View>
     </View>
   );
 };
@@ -67,22 +102,43 @@ const styles = StyleSheet.create({
   containerTop: {
     flex: 0.3,
     borderBottomWidth: 1,
+    borderColor: GRAY,
   },
   containerMiddle: {
     flex: 0.45,
   },
   containerBottom: {
     flex: 0.25,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   textContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     borderBottomWidth: 1,
+    borderColor: GRAY,
     paddingVertical: 20,
   },
   text: {
     fontSize: 22,
     fontWeight: '600',
   },
+  title: {
+    backgroundColor: PRIMARY.LIGHT,
+    fontSize: 18,
+    fontWeight: '600',
+    paddingHorizontal: 10,
+    paddingVertical: 9,
+    marginBottom: 20,
+  },
+  containerInfo: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 30,
+  },
+  loginInfo: {
+    marginVertical: 12,
+  },
+  //   view: { flexDirection: 'row' },
 });
 export default MyPageScreen;
