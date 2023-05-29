@@ -1,9 +1,10 @@
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Pressable } from 'react-native';
 import { PRIMARY, WHITE } from '../../color';
 import { useState } from 'react';
 import IconText from '../components/IconText';
+import { AntDesign } from '@expo/vector-icons';
 
-const AgreeScreen = () => {
+const AgreeScreen = ({ navigation }) => {
   const [agreedAll, setAgreedAll] = useState(false);
   const [service, setSerivce] = useState(false);
   const [agree, setAgree] = useState(false);
@@ -22,15 +23,23 @@ const AgreeScreen = () => {
 
   const handleService = () => {
     setSerivce(!service);
-    if (!service) {
+    if (service) {
       setAgreedAll(false);
     }
   };
 
   const handleAgree = () => {
     setAgree(!agree);
-    if (!agree) {
+    if (agree) {
       setAgreedAll(false);
+    }
+  };
+
+  const next = () => {
+    if ((service && agree) || agreedAll) {
+      navigation.push('SignUp');
+    } else {
+      alert('모두 동의해 주세요');
     }
   };
 
@@ -40,6 +49,17 @@ const AgreeScreen = () => {
         <Text style={styles.text}>
           서비스 가입을 위해{'\n'}약관에 동의해 주세요
         </Text>
+      </View>
+      <View
+        style={{
+          alignItems: 'flex-end',
+          backgroundColor: WHITE,
+          padding: 20,
+        }}
+      >
+        <Pressable onPress={next}>
+          <AntDesign name="arrowright" size={24} color="black" />
+        </Pressable>
       </View>
       <View style={styles.BottomContainer}>
         <IconText name={agreedAll} text={'전체동의'} onPress={handleAgreeAll} />
@@ -62,11 +82,11 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   TopContainer: {
     backgroundColor: PRIMARY.LIGHT,
-    flex: 2,
+    flex: 1.5,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  BottomContainer: { flex: 1 },
+  BottomContainer: { flex: 1, justifyContent: 'space-evenly' },
   text: { color: WHITE, fontSize: 33, fontWeight: '700' },
 });
 

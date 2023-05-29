@@ -29,7 +29,12 @@ const AuthStack = () => {
       <Stack.Screen
         name="Agree"
         component={AgreeScreen}
-        options={{ title: '' }}
+        options={{
+          title: '',
+          headerStyle: {
+            backgroundColor: PRIMARY.LIGHT,
+          },
+        }}
       />
       <Stack.Screen
         name="SignUp"
