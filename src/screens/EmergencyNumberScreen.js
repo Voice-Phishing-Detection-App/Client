@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TextInput } from 'react-native';
-import { GRAY, PRIMARY, SBTN, WHITE } from '../../color';
+import { PRIMARY, SBTN, WHITE } from '../../color';
 import { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import Sbtn from '../components/Sbtn';
