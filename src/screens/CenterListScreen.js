@@ -1,6 +1,7 @@
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import ListItem from '../components/ListItem';
 import { WHITE } from '../../color';
+import EmptyList from '../components/EmptyList';
 
 const styles = StyleSheet.create({
   container: {
@@ -27,7 +28,7 @@ const CenterListScreen = () => {
     },
   ];
 
-  return (
+  return List.length ? (
     <SafeAreaView style={styles.container}>
       <FlatList
         data={List}
@@ -38,6 +39,8 @@ const CenterListScreen = () => {
         ListHeaderComponentStyle={{ height: 10 }}
       />
     </SafeAreaView>
+  ) : (
+    <EmptyList />
   );
 };
 

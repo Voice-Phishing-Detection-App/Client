@@ -1,7 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { PRIMARY, WHITE } from '../../color';
-import HeaderLeftButton from '../components/HeaderLeftButton';
-import HeaderRightButton from '../components/HeaderRightButton';
 import BottomStack from './BottomStack';
 import SetUpScreen from '../screens/SetUpScreen';
 import DoubtListScreen from '../screens/DoubtListScreen';
@@ -19,7 +17,6 @@ const MainStack = () => {
       initialRouteName="BottomHome"
       screenOptions={{
         contentStyle: { backgroundColor: WHITE },
-
         headerTitleAlign: 'center',
         headerTintColor: PRIMARY.DEFAULT,
         headerTitleStyle: { fontWeight: '700' },
@@ -29,16 +26,22 @@ const MainStack = () => {
       <Stack.Screen
         name="BottomHome"
         component={BottomStack}
-        options={{
-          headerRight: HeaderRightButton,
-          headerLeft: HeaderLeftButton,
-        }}
+        options={{ headerShown: false }}
       />
       {/*nameprops -> 대문자 선호 */}
       <Stack.Screen
         name="SetUp"
         component={SetUpScreen}
-        options={{ title: '알림' }}
+        options={{
+          title: '알림',
+          headerStyle: {
+            backgroundColor: PRIMARY.LIGHT,
+          },
+          headerTintColor: PRIMARY.DARK,
+          headerTitleStyle: {
+            fontWeight: '900',
+          },
+        }}
       />
       <Stack.Screen
         name="Doubt"
