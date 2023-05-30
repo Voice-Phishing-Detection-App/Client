@@ -47,7 +47,7 @@ ListItem.defaultProps = {
   name: 'default',
 };
 ListItem.propTypes = {
-  name: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
   item: PropTypes.object.isRequired,
 };
 const styles = StyleSheet.create({

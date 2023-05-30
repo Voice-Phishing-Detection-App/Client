@@ -22,7 +22,7 @@ const SearchScreen = () => {
           <TextInput
             style={styles.search}
             value={phoneValue}
-            onChangeText={setPhoneValue}
+            onChangeText={(text) => setPhoneValue(text.trim())}
             placeholder="전화번호 입력"
             onBlur={() => setIsFocused(false)}
             onFocus={() => setIsFocused(true)}
@@ -69,18 +69,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   top: {
-    flex: 0.7,
+    flex: 1,
   },
   middle: {
-    flex: 0.2,
+    flex: 0.3,
     backgroundColor: PRIMARY.LIGHT,
     justifyContent: 'center',
   },
   bottom: {
     flex: 2,
+    backgroundColor: WHITE,
   },
   title: {
-    fontSize: 30,
+    fontSize: 23,
     color: WHITE,
     fontWeight: '700',
     padding: Left,
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
     marginLeft: Left + 10,
   },
   middletext: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '600',
     marginLeft: Left,
   },

@@ -9,6 +9,7 @@ import EmergencyNumberScreen from '../screens/EmergencyNumberScreen';
 import ReportListScreen from '../screens/ReportListScreen';
 import ReportListDetailScreen from '../screens/ReportListDetailScreen';
 import PhisingListDetailScreen from '../screens/PhisingListDetailScreen';
+import HeaderLeftBack from '../components/HeaderLeftBack';
 const Stack = createNativeStackNavigator();
 //로그인 후 컴포넌트
 const MainStack = () => {
@@ -21,6 +22,7 @@ const MainStack = () => {
         headerTintColor: PRIMARY.DEFAULT,
         headerTitleStyle: { fontWeight: '700' },
         headerBackTitleVisible: false,
+        headerLeft: HeaderLeftBack,
       }}
     >
       <Stack.Screen

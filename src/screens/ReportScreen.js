@@ -102,6 +102,7 @@ const style2 = StyleSheet.create({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: WHITE,
   },
   picker: { width: '80%', height: 70, marginLeft: 30 },
   phone: {
