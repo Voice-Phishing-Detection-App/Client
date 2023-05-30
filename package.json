@@ -20,6 +20,7 @@
     "react-native": "0.71.3",
     "react-native-balloon": "^1.0.0",
     "react-native-safe-area-view": "^1.1.1"
+    "react-native-simple-modal": "^9.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
