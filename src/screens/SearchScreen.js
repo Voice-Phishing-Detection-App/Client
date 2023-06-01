@@ -69,10 +69,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   top: {
-    flex: 1,
+    flex: 1.5,
   },
   middle: {
-    flex: 0.3,
+    flex: 0.25,
     backgroundColor: PRIMARY.LIGHT,
     justifyContent: 'center',
   },
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     color: WHITE,
     fontWeight: '700',
     padding: Left,
+    marginTop: '10%',
   },
   search: {
     backgroundColor: WHITE,

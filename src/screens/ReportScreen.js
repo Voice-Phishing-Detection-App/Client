@@ -7,7 +7,7 @@ import { GRAY, PRIMARY, WHITE } from '../../color';
 import Sbtn from '../components/Sbtn';
 
 const ReportScreen = () => {
-  const [select, setSelect] = useState(true);
+  const [select, setSelect] = useState(false);
   const [selectDoubt, setSelectDoubt] = useState(null);
   //   const [doubtList, setDoubtList] = useState([]);
   const [doubtList, setDoubtList] = useState([
@@ -26,14 +26,14 @@ const ReportScreen = () => {
       <View style={{ flexDirection: 'row' }}>
         <IconText
           text="예"
-          name={!select}
+          name={select}
           onPress={() => {
             setSelect(true);
           }}
         />
         <IconText
           text="아니요"
-          name={select}
+          name={!select}
           onPress={() => {
             setSelect(false);
           }}
@@ -88,10 +88,11 @@ const ReportScreen = () => {
 
 const style2 = StyleSheet.create({
   container: {
-    backgroundColor: PRIMARY.DARK,
+    backgroundColor: PRIMARY.DEFAULT,
     width: 70,
     height: 40,
     marginLeft: '75%',
+    marginBottom: '5%',
   },
   title: {
     color: WHITE,
