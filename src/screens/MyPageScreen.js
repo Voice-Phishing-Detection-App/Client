@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: WHITE,
   },
   containerTop: {
-    flex: 0.3,
+    flex: 0.35,
     borderBottomWidth: 1,
     borderColor: GRAY,
   },
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     flex: 0.45,
   },
   containerBottom: {
-    flex: 0.25,
+    flex: 0.2,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -120,16 +120,16 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   text: {
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: '600',
   },
   title: {
     backgroundColor: PRIMARY.LIGHT,
     fontSize: 18,
     fontWeight: '600',
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
     paddingVertical: 9,
-    marginBottom: 20,
+    marginBottom: 12,
   },
   containerInfo: {
     flexDirection: 'row',

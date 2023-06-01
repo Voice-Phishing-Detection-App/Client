@@ -34,6 +34,7 @@ const BottomStack = () => {
         component={HomeScreen}
         options={{
           title: '피노키오',
+          tabBarLabel: '홈',
           headerRight: HeaderRightButton,
           headerLeft: HeaderLeftButton,
           tabBarIcon: ({ color, size }) => (
@@ -46,6 +47,7 @@ const BottomStack = () => {
         component={SearchScreen}
         options={{
           tabBarLabel: '검색',
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="md-search-sharp" color={color} size={size} />
           ),
@@ -56,7 +58,11 @@ const BottomStack = () => {
         name="Report"
         component={ReportScreen}
         options={{
-          tabBarLabel: '신고',
+          title: '신고',
+          headerStyle: {
+            backgroundColor: PRIMARY.DEFAULT,
+          },
+          headerTintColor: WHITE,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="policy" color={color} size={size} />
           ),

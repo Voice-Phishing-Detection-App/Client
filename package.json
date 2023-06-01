@@ -19,6 +19,7 @@
     "react": "18.2.0",
     "react-native": "0.71.3",
     "react-native-balloon": "^1.0.0",
+    "react-native-picker-select": "^8.0.4",
     "react-native-safe-area-view": "^1.1.1",
     "react-native-simple-modal": "^9.0.1"
   },
