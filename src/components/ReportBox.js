@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { PRIMARY } from '../../color';
+import { PRIMARY, SBTN } from '../../color';
 
 const ReportBox = ({ text }) => {
   return (
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     height: 50,
-    backgroundColor: PRIMARY.LIGHT,
+    backgroundColor: SBTN.DEFAULT,
   },
   text: {
     fontSize: 17,
