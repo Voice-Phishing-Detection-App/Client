@@ -44,7 +44,7 @@ const AppModal = ({ modalVisible, toggleModal }) => {
     // </View>
   );
 };
-AppModal.PropTypes = {
+AppModal.propTypes = {
   toggleModal: PropTypes.func,
   modalVisible: PropTypes.bool,
 };
