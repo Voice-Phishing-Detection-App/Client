@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
 import { PRIMARY, SBTN, WHITE } from '../../color';
 import { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
@@ -117,14 +117,14 @@ const EmergencyNumberScreen = () => {
           등록된 연락처
         </Text>
       </View>
-      <View style={styles.bottom}>
-        <View>
+      <ScrollView style={styles.bottom}>
+        <View style={{ marginBottom: 30 }}>
           {data.map((item, index) => (
             <View style={styles.listContainer} key={index}>
               <Text style={styles.listText}>{item.rel}</Text>
               <View style={styles.listback}>
                 <Text style={styles.listText}>{item.number}</Text>
-                <Text style={styles.listText}>{item.sens}</Text>
+                <Text style={[styles.listText]}>{item.sens}</Text>
               </View>
               <Sbtn
                 styles2={{ title: { fontSize: 12 } }}
@@ -142,7 +142,7 @@ const EmergencyNumberScreen = () => {
             </View>
           ))}
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -152,11 +152,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   top: {
-    flex: 0.39,
+    flex: 0.8,
     backgroundColor: PRIMARY.LIGHT,
   },
   middle: {
-    flex: 0.08,
+    flex: 0.15,
     backgroundColor: SBTN.DEFAULT,
     justifyContent: 'center',
   },
