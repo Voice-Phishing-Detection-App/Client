@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "client",
+    "name": "phinocchio",
     "slug": "client",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -20,10 +20,24 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "softwareKeyboardLayoutMode": "pan"
+      "package": "com.phisingUniv.phinocchio"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "@react-native-voice/voice",
+        {
+          "microphonePermission": "CUSTOM: Allow $(PRODUCT_NAME) to access the microphone",
+          "speechRecognitionPermission": "CUSTOM: Allow $(PRODUCT_NAME) to securely recognize user speech"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "d0411997-65b0-4ee7-9cb3-65e049b486bc"
+      }
     }
   }
 }
