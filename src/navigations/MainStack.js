@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { PRIMARY, WHITE } from '../../color';
+import { PRIMARY, WHITE } from '../color';
 import BottomStack from './BottomStack';
 import SetUpScreen from '../screens/SetUpScreen';
 import DoubtListScreen from '../screens/DoubtListScreen';

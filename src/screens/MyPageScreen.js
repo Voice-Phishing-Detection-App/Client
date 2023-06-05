@@ -1,6 +1,6 @@
 import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { GRAY, PRIMARY, WHITE } from '../../color';
+import { GRAY, PRIMARY, WHITE } from '../color';
 import { useNavigation } from '@react-navigation/native';
 import Sbtn from '../components/Sbtn';
 import AppModal from '../components/AppModal';

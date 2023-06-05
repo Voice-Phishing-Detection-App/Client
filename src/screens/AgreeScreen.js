@@ -1,5 +1,5 @@
 import { View, StyleSheet, Text, Pressable } from 'react-native';
-import { PRIMARY, WHITE } from '../../color';
+import { PRIMARY, WHITE } from '../color';
 import { useState } from 'react';
 import IconText from '../components/IconText';
 import { AntDesign } from '@expo/vector-icons';

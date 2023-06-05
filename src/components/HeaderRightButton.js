@@ -2,7 +2,7 @@ import { Pressable } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
-import { BLACK, PRIMARY } from '../../color';
+import { BLACK, PRIMARY } from '../color';
 
 const HeaderRightButton = () => {
   const navigation = useNavigation();

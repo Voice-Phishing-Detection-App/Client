@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { PRIMARY, WHITE } from '../../color';
+import { PRIMARY, WHITE } from '../color';
 import Sbtn from './Sbtn';
 import { Feather } from '@expo/vector-icons';
 

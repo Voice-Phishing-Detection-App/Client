@@ -3,7 +3,7 @@ import ReportBox from '../components/ReportBox';
 import { useState } from 'react';
 import IconText from '../components/IconText';
 import { Picker } from '@react-native-picker/picker';
-import { GRAY, PRIMARY, WHITE } from '../../color';
+import { GRAY, PRIMARY, WHITE } from '../color';
 import Sbtn from '../components/Sbtn';
 
 const ReportScreen = () => {

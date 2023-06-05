@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { BLACK, GRAY, PRIMARY, SBTN, WHITE } from '../../color';
+import { BLACK, GRAY, PRIMARY, SBTN, WHITE } from '../color';
 import { Image } from 'react-native';
 import Balloon from 'react-native-balloon';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';

@@ -1,6 +1,6 @@
 import { ActivityIndicator, Pressable, StyleSheet, Text } from 'react-native';
 import PropTypes from 'prop-types';
-import { GRAY, PRIMARY, WHITE } from '../../color';
+import { GRAY, PRIMARY, WHITE } from '../color';
 
 const Button = ({ title, onPress, disabled, isLoading }) => {
   return (

@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignUpScreen from '../screens/SignUpScreen';
 import SignInScreen from '../screens/SignInScreen';
-import { PRIMARY, WHITE } from '../../color';
+import { PRIMARY, WHITE } from '../color';
 import FindIDScreen from '../screens/FindIDScreen';
 import FindPassScreen from '../screens/FindPassScreen';
 import AgreeScreen from '../screens/AgreeScreen';

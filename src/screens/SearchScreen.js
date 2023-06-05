@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { BLACK, GRAY, PRIMARY, SBTN, WHITE } from '../../color';
+import { BLACK, GRAY, PRIMARY, SBTN, WHITE } from '../color';
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from 'react';
 import Sbtn from '../components/Sbtn';

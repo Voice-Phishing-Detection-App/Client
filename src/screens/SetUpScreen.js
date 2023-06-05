@@ -1,6 +1,6 @@
 import { StyleSheet, Switch, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { GRAY, PRIMARY, WHITE } from '../../color';
+import { GRAY, PRIMARY, WHITE } from '../color';
 import { useState } from 'react';
 
 const SetUpScreen = () => {

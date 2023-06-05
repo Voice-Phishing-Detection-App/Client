@@ -1,6 +1,6 @@
 import { Pressable, Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { BLACK, SBTN } from '../../color';
+import { BLACK, SBTN } from '../color';
 
 const Sbtn = ({ title, onPress, styles2 }) => {
   return (

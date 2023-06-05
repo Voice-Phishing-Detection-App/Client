@@ -2,7 +2,7 @@ import { View, StyleSheet, Text } from 'react-native';
 import Button from '../components/Button';
 import TextInput, { IconNames, ReturnKeyTypes } from '../components/TextInput';
 import { useState, useRef, useEffect } from 'react';
-import { PRIMARY } from '../../color';
+import { PRIMARY } from '../color';
 import PropTypes from 'prop-types';
 
 const SignInScreen = ({ navigation }) => {
