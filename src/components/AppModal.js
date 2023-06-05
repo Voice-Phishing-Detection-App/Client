@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { PRIMARY, WHITE } from '../../color';
+import { PRIMARY, WHITE } from '../color';
 import Sbtn from './Sbtn';
 import { Feather } from '@expo/vector-icons';
 
@@ -44,7 +44,7 @@ const AppModal = ({ modalVisible, toggleModal }) => {
     // </View>
   );
 };
-AppModal.PropTypes = {
+AppModal.propTypes = {
   toggleModal: PropTypes.func,
   modalVisible: PropTypes.bool,
 };

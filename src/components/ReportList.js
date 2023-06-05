@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { GRAY } from '../../color';
+import { GRAY } from '../color';
 
 const ReportList = ({ list, item }) => {
   return (

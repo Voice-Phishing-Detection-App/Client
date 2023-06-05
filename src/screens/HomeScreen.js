@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { BLACK, GRAY, PRIMARY, SBTN, WHITE } from '../../color';
+import { BLACK, GRAY, PRIMARY, SBTN, WHITE } from '../color';
 import { Image } from 'react-native';
 import Balloon from 'react-native-balloon';
 import { MaterialCommunityIcons, Feather } from '@expo/vector-icons';
@@ -27,11 +27,11 @@ const HomeScreen = () => {
             triangleDirection="left"
             triangleOffset="65%"
             height={100}
-            width={160}
+            width={180}
             // onPress={() => console.log('press')}
           >
             <Text style={{ fontSize: 14 }}>
-              문예주님 안녕하세요.{'\n'}오늘 총 신고 기록은{'\n'}3번 있어요
+              문예주님 안녕하세요.{'\n'}오늘 총 신고 기록은{'\n'}3번 있어요.
             </Text>
           </Balloon>
         </View>

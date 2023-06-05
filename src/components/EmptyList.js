@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
-import { PRIMARY } from '../../color';
+import { PRIMARY } from '../color';
 
 const EmptyList = () => {
   return (

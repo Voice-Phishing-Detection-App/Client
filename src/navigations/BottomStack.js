@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
-import { PRIMARY, WHITE } from '../../color';
+import { PRIMARY, WHITE } from '../color';
 import HeaderRightButton from '../components/HeaderRightButton';
 import HeaderLeftButton from '../components/HeaderLeftButton';
 import {

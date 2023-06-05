@@ -1,6 +1,6 @@
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import ListItem from '../components/ListItem';
-import { WHITE } from '../../color';
+import { WHITE } from '../color';
 import EmptyList from '../components/EmptyList';
 
 const styles = StyleSheet.create({

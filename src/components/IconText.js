@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Feather } from '@expo/vector-icons';
-import { BLACK } from '../../color';
+import { BLACK } from '../color';
 
 const IconText = ({ text, name, onPress }) => {
   return (

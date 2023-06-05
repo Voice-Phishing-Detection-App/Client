@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { PRIMARY, SBTN } from '../../color';
+import { PRIMARY, SBTN } from '../color';
 
 const ReportBox = ({ text }) => {
   return (

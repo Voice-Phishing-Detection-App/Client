@@ -1,5 +1,5 @@
 import { Button, StyleSheet, Text, View } from 'react-native';
-import { GRAY } from '../../color';
+import { GRAY } from '../color';
 import PropTypes from 'prop-types';
 
 const ReportListDetailScreen = ({ route, navigation }) => {
