@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "phinocchio",
-    "slug": "client",
+    "name": "my-app",
+    "slug": "my-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -19,9 +21,15 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff",
-        "blockedPermissions": ["android.permission.RECORD_AUDIO"]
+        "blockedPermissions": [
+          "android.permission.RECORD_AUDIO"
+        ]
       },
-      "package": "com.phisingUniv.phinocchio"
+      "package": "com.phisingUniv.phinocchio",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -43,7 +51,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "d0411997-65b0-4ee7-9cb3-65e049b486bc"
+        "projectId": "9ee49105-dc27-4eda-9346-aee8e51062a3"
       }
     }
   }
