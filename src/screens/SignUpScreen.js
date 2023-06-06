@@ -2,8 +2,6 @@ import { View, StyleSheet, Keyboard, Alert } from 'react-native';
 import TextInput, { ReturnKeyTypes } from '../components/TextInput';
 import { useEffect, useRef, useState } from 'react';
 import Button from '../components/Button';
-import axios from 'axios';
-import axiosInstance from '../utils/axiosInstance';
 
 const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');

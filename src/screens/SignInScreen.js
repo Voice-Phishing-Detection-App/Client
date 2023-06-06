@@ -4,7 +4,6 @@ import TextInput, { IconNames, ReturnKeyTypes } from '../components/TextInput';
 import { useState, useRef, useEffect } from 'react';
 import { PRIMARY } from '../color';
 import PropTypes from 'prop-types';
-import axiosInstance from '../utils/axiosInstance';
 
 const SignInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
