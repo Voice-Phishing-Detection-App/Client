@@ -62,7 +62,7 @@ const ReportScreen = () => {
           placeholder="- 빼고 적어주세요"
         />
       </View>
-      <ReportBox text="신고 사유" />
+      <ReportBox text="신고 유형" />
       <Picker
         style={styles.picker}
         selectedValue={reason}
