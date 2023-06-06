@@ -6,8 +6,8 @@ import DoubtListScreen from '../screens/DoubtListScreen';
 import PhisingListScreen from '../screens/PhisingListScreen';
 import CenterListScreen from '../screens/CenterListScreen';
 import EmergencyNumberScreen from '../screens/EmergencyNumberScreen';
-import ReportListScreen from '../screens/ReportListScreen';
-import ReportListDetailScreen from '../screens/ReportListDetailScreen';
+import MyReportListScreen from '../screens/MyReportListScreen';
+import MyReportListDetailScreen from '../screens/MyReportListDetailScreen';
 import PhisingListDetailScreen from '../screens/PhisingListDetailScreen';
 import HeaderLeftBack from '../components/HeaderLeftBack';
 const Stack = createNativeStackNavigator();
@@ -117,8 +117,8 @@ const MainStack = () => {
         }}
       />
       <Stack.Screen
-        name="ReportList"
-        component={ReportListScreen}
+        name="MyReportList"
+        component={MyReportListScreen}
         options={{
           title: '신고 기록',
           headerStyle: {
@@ -131,8 +131,8 @@ const MainStack = () => {
         }}
       />
       <Stack.Screen
-        name="ReportListDetail"
-        component={ReportListDetailScreen}
+        name="MyReportListDetail"
+        component={MyReportListDetailScreen}
         options={{
           title: '신고 기록',
           headerStyle: {

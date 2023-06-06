@@ -1,5 +1,4 @@
-import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
-import PropTypes from 'prop-types';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { GRAY, PRIMARY, WHITE } from '../color';
 import { useNavigation } from '@react-navigation/native';
 import Sbtn from '../components/Sbtn';
@@ -45,7 +44,7 @@ const MyPageScreen = () => {
       <View style={styles.containerMiddle}>
         <Pressable
           onPress={() => {
-            navigation.navigate('ReportList');
+            navigation.navigate('MyReportList');
           }}
           hitSlop={10}
         >
@@ -63,22 +62,12 @@ const MyPageScreen = () => {
             <Text style={styles.text}>알림 설정</Text>
           </View>
         </Pressable>
-        <Pressable
-          onPress={() => {
-            navigation.navigate('ReportList');
-          }}
-          hitSlop={10}
-        >
+        <Pressable onPress={() => {}} hitSlop={10}>
           <View style={styles.textContainer}>
             <Text style={styles.text}>로그아웃</Text>
           </View>
         </Pressable>
-        <Pressable
-          onPress={() => {
-            navigation.navigate('ReportList');
-          }}
-          hitSlop={10}
-        >
+        <Pressable onPress={() => {}} hitSlop={10}>
           <View style={styles.textContainer}>
             <Text style={styles.text}>탈퇴하기</Text>
           </View>

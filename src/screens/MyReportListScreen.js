@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-const ReportListScreen = () => {
+const MyReportListScreen = () => {
   const List = [
     {
       id: 1,
@@ -59,4 +59,4 @@ const ReportListScreen = () => {
   );
 };
 
-export default ReportListScreen;
+export default MyReportListScreen;
