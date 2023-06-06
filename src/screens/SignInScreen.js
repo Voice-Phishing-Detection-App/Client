@@ -1,9 +1,10 @@
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Keyboard, Alert } from 'react-native';
 import Button from '../components/Button';
 import TextInput, { IconNames, ReturnKeyTypes } from '../components/TextInput';
 import { useState, useRef, useEffect } from 'react';
 import { PRIMARY } from '../color';
 import PropTypes from 'prop-types';
+import axiosInstance from '../utils/axiosInstance';
 
 const SignInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -21,8 +22,25 @@ const SignInScreen = ({ navigation }) => {
       Keyboard.dismiss();
       setIsLoading(true);
       try {
-        const data = await signIn(email, password);
-        setUser(data);
+        fetch('http://172.30.1.32:8080/login', {
+          method: 'POST',
+          body: JSON.stringify({
+            id: email,
+            password: password,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            const token = data.token; // 토큰 추출 -> 얘를 asyncStroage에 저장
+            // 토큰을 사용하여 원하는 작업 수행
+            console.log(token);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       } catch (e) {
         Alert.alert('로그인 실패', e, [
           {
