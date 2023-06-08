@@ -4,6 +4,8 @@ import TextInput, { IconNames, ReturnKeyTypes } from '../components/TextInput';
 import { useState, useRef, useEffect } from 'react';
 import { PRIMARY } from '../color';
 import PropTypes from 'prop-types';
+import * as SecureStore from 'expo-secure-store';
+import { url } from '../url';
 
 const SignInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -21,7 +23,7 @@ const SignInScreen = ({ navigation }) => {
       Keyboard.dismiss();
       setIsLoading(true);
       try {
-        fetch('http://172.30.1.32:8080/login', {
+        fetch(`${url}/login`, {
           method: 'POST',
           body: JSON.stringify({
             id: email,
@@ -32,10 +34,15 @@ const SignInScreen = ({ navigation }) => {
           },
         })
           .then((response) => response.json())
-          .then((data) => {
-            const token = data.token; // 토큰 추출 -> 얘를 asyncStroage에 저장
-            // 토큰을 사용하여 원하는 작업 수행
+          .then(async (data) => {
+            const token = data.token; // 토큰 추출
             console.log(token);
+
+            try {
+              await SecureStore.setItemAsync('Token', token);
+            } catch (e) {
+              console.error('token 에러: ' + e);
+            }
           })
           .catch((error) => {
             console.error(error);
