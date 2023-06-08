@@ -11,10 +11,12 @@ import { AntDesign } from '@expo/vector-icons';
 import { useState } from 'react';
 import Sbtn from '../components/Sbtn';
 import ReportList from '../components/ReportList';
+import { useNavigation } from '@react-navigation/native';
 
 const Left = 30;
 
 const SearchScreen = () => {
+  const navigation = useNavigation();
   const [isFocused, setIsFocused] = useState(false);
   const [phoneValue, setPhoneValue] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('01012345678'); // 실제 통신할때는 ''로 설정 -> ''일때는 신고정보 안보임
@@ -63,6 +65,9 @@ const SearchScreen = () => {
             flexDirection: 'row',
             alignItems: 'center',
             margin: 20,
+          }}
+          onPress={() => {
+            navigation.navigate('SearchList');
           }}
         >
           <AntDesign name="caretright" size={15} color="black" />
