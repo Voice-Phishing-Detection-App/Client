@@ -1,8 +1,7 @@
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { GRAY } from '../color';
-import PropTypes from 'prop-types';
 
-const ReportListDetailScreen = ({ route, navigation }) => {
+const MyReportListDetailScreen = ({ route, navigation }) => {
   const { title } = route.params;
   const { date } = route.params;
   const { detail } = route.params;
@@ -18,7 +17,7 @@ const ReportListDetailScreen = ({ route, navigation }) => {
     </View>
   );
 };
-ReportListDetailScreen.propTypes = {};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -48,4 +47,4 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
 });
-export default ReportListDetailScreen;
+export default MyReportListDetailScreen;

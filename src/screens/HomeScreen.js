@@ -84,7 +84,7 @@ const HomeScreen = () => {
         <View>
           <Pressable
             onPress={() => {
-              navigation.navigate('ReportList');
+              navigation.navigate('MyReportList');
             }}
             hitSlop={10}
             style={styles.button}

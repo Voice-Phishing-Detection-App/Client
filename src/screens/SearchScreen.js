@@ -1,18 +1,27 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  ScrollView,
+  Pressable,
+} from 'react-native';
 import { BLACK, GRAY, PRIMARY, SBTN, WHITE } from '../color';
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from 'react';
 import Sbtn from '../components/Sbtn';
 import ReportList from '../components/ReportList';
+import { useNavigation } from '@react-navigation/native';
 
 const Left = 30;
 
 const SearchScreen = () => {
+  const navigation = useNavigation();
   const [isFocused, setIsFocused] = useState(false);
   const [phoneValue, setPhoneValue] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('01012345678'); // 실제 통신할때는 ''로 설정 -> ''일때는 신고정보 안보임
   const [count, setCount] = useState('123');
-  const [reason, setReason] = useState('안수진 바보');
+  const [reason, setReason] = useState(['안수진 바보', '음', '아아아']);
 
   return (
     <View style={styles.container}>
@@ -50,11 +59,26 @@ const SearchScreen = () => {
       <View style={styles.middle}>
         <Text style={styles.middletext}>신고 정보</Text>
       </View>
-      <View style={styles.bottom}>
+      <ScrollView style={styles.bottom}>
+        <Pressable
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            margin: 20,
+          }}
+          onPress={() => {
+            navigation.navigate('SearchList');
+          }}
+        >
+          <AntDesign name="caretright" size={15} color="black" />
+          <Text style={{ fontSize: 18, marginLeft: 15 }}>자세히 보기</Text>
+        </Pressable>
         <ReportList list={'전화번호'} item={phoneNumber} />
         <ReportList list={'횟수'} item={count} />
-        <ReportList list={'사유'} item={reason} />
-      </View>
+        {reason.map((item, index) => (
+          <ReportList list={index == 0 ? '유형' : ''} item={item} />
+        ))}
+      </ScrollView>
     </View>
   );
 };
@@ -72,8 +96,8 @@ const styles = StyleSheet.create({
     flex: 1.5,
   },
   middle: {
-    flex: 0.25,
-    backgroundColor: PRIMARY.LIGHT,
+    flex: 0.2,
+    backgroundColor: SBTN.DEFAULT,
     justifyContent: 'center',
   },
   bottom: {

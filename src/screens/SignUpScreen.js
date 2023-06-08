@@ -1,12 +1,14 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Keyboard, Alert } from 'react-native';
 import TextInput, { ReturnKeyTypes } from '../components/TextInput';
 import { useEffect, useRef, useState } from 'react';
 import Button from '../components/Button';
+import { url } from '../url';
 
 const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
+  const phone = '01028077944';
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
@@ -21,8 +23,25 @@ const SignUpScreen = ({ navigation }) => {
       Keyboard.dismiss();
       setIsLoading(true);
       try {
-        const data = await signIn(name, email, password);
-        setUser(data);
+        fetch(`${url}/signup`, {
+          method: 'POST',
+          body: JSON.stringify({
+            name: name,
+            id: email,
+            password: password,
+            phone_number: phone,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data); // id가 반환
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       } catch (e) {
         Alert.alert('회원가입 실패', e, [
           {

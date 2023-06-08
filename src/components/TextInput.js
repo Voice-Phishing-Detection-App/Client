@@ -100,16 +100,13 @@ const styles = StyleSheet.create({
     color: BLACK,
   },
   input: {
-    borderWidth: 1,
-    borderLeftColor: WHITE,
-    borderRightColor: WHITE,
-    borderTopColor: WHITE,
+    borderBottomWidth: 1,
     paddingHorizontal: 20,
     height: 42,
     paddingLeft: 5,
   },
   focusedInput: {
-    borderWidth: 2,
+    borderBottomWidth: 2,
     borderBottomColor: PRIMARY.DEFAULT,
     color: PRIMARY.DEFAULT,
   },

@@ -17,7 +17,6 @@ const ReportList = ({ list, item }) => {
 
 ReportList.propTypes = {
   list: PropTypes.string,
-  item: PropTypes.string,
 };
 
 const styles = StyleSheet.create({

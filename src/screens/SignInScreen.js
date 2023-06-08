@@ -1,9 +1,11 @@
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Keyboard, Alert } from 'react-native';
 import Button from '../components/Button';
 import TextInput, { IconNames, ReturnKeyTypes } from '../components/TextInput';
 import { useState, useRef, useEffect } from 'react';
 import { PRIMARY } from '../color';
 import PropTypes from 'prop-types';
+import * as SecureStore from 'expo-secure-store';
+import { url } from '../url';
 
 const SignInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -21,8 +23,32 @@ const SignInScreen = ({ navigation }) => {
       Keyboard.dismiss();
       setIsLoading(true);
       try {
-        const data = await signIn(email, password);
-        setUser(data);
+        fetch(`${url}/login`, {
+          method: 'POST',
+          body: JSON.stringify({
+            id: email,
+            password: password,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.json())
+          .then(async (data) => {
+            const token = data.token; // 토큰 추출
+            console.log(token);
+
+            try {
+              await SecureStore.setItemAsync('Token', token);
+              // 로그인 성공 후 메인 화면으로 이동
+              navigation.navigate('Main');
+            } catch (e) {
+              console.error('token 에러: ' + e);
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       } catch (e) {
         Alert.alert('로그인 실패', e, [
           {

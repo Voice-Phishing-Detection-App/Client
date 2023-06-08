@@ -6,10 +6,11 @@ import DoubtListScreen from '../screens/DoubtListScreen';
 import PhisingListScreen from '../screens/PhisingListScreen';
 import CenterListScreen from '../screens/CenterListScreen';
 import EmergencyNumberScreen from '../screens/EmergencyNumberScreen';
-import ReportListScreen from '../screens/ReportListScreen';
-import ReportListDetailScreen from '../screens/ReportListDetailScreen';
+import MyReportListScreen from '../screens/MyReportListScreen';
+import MyReportListDetailScreen from '../screens/MyReportListDetailScreen';
 import PhisingListDetailScreen from '../screens/PhisingListDetailScreen';
 import HeaderLeftBack from '../components/HeaderLeftBack';
+import SearchListScreen from '../screens/SaerchListScreen';
 const Stack = createNativeStackNavigator();
 //로그인 후 컴포넌트
 const MainStack = () => {
@@ -117,8 +118,8 @@ const MainStack = () => {
         }}
       />
       <Stack.Screen
-        name="ReportList"
-        component={ReportListScreen}
+        name="MyReportList"
+        component={MyReportListScreen}
         options={{
           title: '신고 기록',
           headerStyle: {
@@ -131,8 +132,22 @@ const MainStack = () => {
         }}
       />
       <Stack.Screen
-        name="ReportListDetail"
-        component={ReportListDetailScreen}
+        name="MyReportListDetail"
+        component={MyReportListDetailScreen}
+        options={{
+          title: '신고 기록',
+          headerStyle: {
+            backgroundColor: PRIMARY.DEFAULT,
+          },
+          headerTintColor: WHITE,
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      />
+      <Stack.Screen
+        name="SearchList"
+        component={SearchListScreen}
         options={{
           title: '신고 기록',
           headerStyle: {
