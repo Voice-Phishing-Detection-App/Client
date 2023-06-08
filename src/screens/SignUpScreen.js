@@ -2,6 +2,7 @@ import { View, StyleSheet, Keyboard, Alert } from 'react-native';
 import TextInput, { ReturnKeyTypes } from '../components/TextInput';
 import { useEffect, useRef, useState } from 'react';
 import Button from '../components/Button';
+import { url } from '../url';
 
 const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -22,7 +23,7 @@ const SignUpScreen = ({ navigation }) => {
       Keyboard.dismiss();
       setIsLoading(true);
       try {
-        fetch('http://172.30.1.32:8080/signup', {
+        fetch(`${url}/signup`, {
           method: 'POST',
           body: JSON.stringify({
             name: name,
