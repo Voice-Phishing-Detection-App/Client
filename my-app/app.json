@@ -11,14 +11,19 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#ffffff",
+        "blockedPermissions": [
+          "android.permission.RECORD_AUDIO"
+        ]
       },
       "package": "com.phisingUniv.phinocchio",
       "permissions": [
@@ -43,6 +48,11 @@
           "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "9ee49105-dc27-4eda-9346-aee8e51062a3"
+      }
+    }
   }
 }

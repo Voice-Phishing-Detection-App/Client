@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -27,10 +25,9 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "owner": "moonyeju",
     "extra": {
       "eas": {
-        "projectId": "dd47e186-0bd6-479a-8caf-232d2a0e4ee3"
+        "projectId": "d0411997-65b0-4ee7-9cb3-65e049b486bc"
       }
     }
   }
