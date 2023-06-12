@@ -3,6 +3,8 @@ import { PRIMARY, SBTN, WHITE } from '../color';
 import { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import Sbtn from '../components/Sbtn';
+import * as SecureStore from 'expo-secure-store';
+import { url } from '../url';
 
 const EmergencyNumberScreen = () => {
   const [isFocused, setIsFocused] = useState(false);
@@ -14,20 +16,20 @@ const EmergencyNumberScreen = () => {
     '3단계',
   ]);
   const [phone, setPhone] = useState('');
-  const [data, setData] = useState([
-    { rel: '엄마', number: '010-1234-5678', sens: '3단계' },
-    { rel: '아빠', number: '010-1234-6578', sens: '1단계' },
+  const [list, setList] = useState([
+    { sosId: 1, rel: '엄마', number: '010-1234-5678', sens: '3단계' },
+    { sosId: 2, rel: '아빠', number: '010-1234-6578', sens: '1단계' },
   ]);
-  const [editBtn, setEditBtn] = useState(false);
+  const [editingSosId, setEditingSosId] = useState(null);
 
   const edit = (item) => {
-    if (editBtn === false) {
-      setEditBtn(true);
+    if (editingSosId === null) {
+      setEditingSosId(item.sosId);
       setRelation(item.rel);
       setSensitivity(item.sens);
       setPhone(item.number);
     } else {
-      setEditBtn(false);
+      setEditingSosId(null);
       setRelation('');
       setSensitivity(null);
       setPhone('');
@@ -108,7 +110,7 @@ const EmergencyNumberScreen = () => {
               title: { fontSize: 12 },
             }}
             title={'등록'}
-            onPress={() => {}}
+            onPress={add}
           />
         </View>
       </View>
@@ -119,7 +121,7 @@ const EmergencyNumberScreen = () => {
       </View>
       <ScrollView style={styles.bottom}>
         <View style={{ marginBottom: 30 }}>
-          {data.map((item, index) => (
+          {list.map((item, index) => (
             <View style={styles.listContainer} key={index}>
               <Text style={styles.listText}>{item.rel}</Text>
               <View style={styles.listback}>
@@ -128,7 +130,7 @@ const EmergencyNumberScreen = () => {
               </View>
               <Sbtn
                 styles2={{ title: { fontSize: 12 } }}
-                title={!editBtn ? '수정' : '취소'}
+                title={editingSosId === item.sosId ? '취소' : '수정'}
                 onPress={() => edit(item)}
               />
               <Sbtn
