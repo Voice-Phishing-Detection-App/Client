@@ -1,6 +1,13 @@
-import { StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  ScrollView,
+  Alert,
+} from 'react-native';
 import { PRIMARY, SBTN, WHITE } from '../color';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import Sbtn from '../components/Sbtn';
 import * as SecureStore from 'expo-secure-store';
@@ -8,33 +15,144 @@ import { url } from '../url';
 
 const EmergencyNumberScreen = () => {
   const [isFocused, setIsFocused] = useState(false);
-  const [relation, setRelation] = useState('');
-  const [sensitivity, setSensitivity] = useState(null);
-  const [sensitivityList, setSensitivityList] = useState([
-    '1단계',
-    '2단계',
-    '3단계',
-  ]);
+  const [rel, setRel] = useState('');
+  const [sensitivity, setSensitivity] = useState(1);
+  const [sensitivityList, setSensitivityList] = useState([1, 2, 3]);
+
   const [phone, setPhone] = useState('');
   const [list, setList] = useState([
-    { sosId: 1, rel: '엄마', number: '010-1234-5678', sens: '3단계' },
-    { sosId: 2, rel: '아빠', number: '010-1234-6578', sens: '1단계' },
+    {
+      sosId: 1,
+      relation: '엄마',
+      phoneNumber: '010-1234-5678',
+      level: '3단계',
+    },
+    {
+      sosId: 2,
+      relation: '아빠',
+      phoneNumber: '010-1234-6578',
+      level: '1단계',
+    },
   ]);
   const [editingSosId, setEditingSosId] = useState(null);
 
   const edit = (item) => {
     if (editingSosId === null) {
       setEditingSosId(item.sosId);
-      setRelation(item.rel);
-      setSensitivity(item.sens);
-      setPhone(item.number);
+      setRel(item.relation);
+      setSensitivity(item.level);
+      setPhone(item.phoneNumber);
     } else {
       setEditingSosId(null);
-      setRelation('');
+      setRel('');
       setSensitivity(null);
       setPhone('');
     }
   };
+
+  // 통신
+  // 긴급연락처 추가
+  const add = async () => {
+    try {
+      const token = await SecureStore.getItemAsync('Token');
+      if (token !== null) {
+        // 토큰을 사용하여 fetch 실행
+        fetch(`${url}/sos/add`, {
+          method: 'POST',
+          body: JSON.stringify({
+            phoneNumber: phone,
+            relation: rel,
+            level: sensitivity,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, // 토큰 사용
+          },
+        })
+          .then((response) => {
+            response.status;
+          })
+          .then((data) => {
+            Alert.alert('등록 성공');
+            console.log('add 성공: ' + data);
+          })
+          .catch((error) => {
+            console.error('add 실패: ' + error);
+          });
+      }
+    } catch (e) {
+      // 토큰 추출 에러
+      console.error(e);
+    }
+  };
+
+  // 긴급연락처 조회
+  const check = async () => {
+    try {
+      const token = await SecureStore.getItemAsync('Token');
+      if (token !== null) {
+        // 토큰을 사용하여 fetch 실행
+        fetch(`${url}/sos/list`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, // 토큰 사용
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('list 성공: ' + data);
+            setList(data);
+            check();
+          })
+          .catch((error) => {
+            console.error('list 실패: ' + error);
+          });
+      }
+    } catch (e) {
+      // 토큰 추출 에러
+      console.error(e);
+    }
+  };
+
+  // 긴급연락처 수정
+  const update = async () => {
+    try {
+      const token = await SecureStore.getItemAsync('Token');
+      if (token !== null) {
+        // 토큰을 사용하여 fetch 실행
+        fetch(`${url}/sos/update`, {
+          method: 'POST',
+          body: JSON.stringify({
+            sosId: 1,
+            phoneNumber: phone,
+            relation: rel,
+            level: sensitivity,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, // 토큰 사용
+          },
+        })
+          .then((response) => {
+            response.status;
+          })
+          .then((data) => {
+            console.log('add 성공: ' + data);
+          })
+          .catch((error) => {
+            console.error('add 실패: ' + error);
+          });
+      }
+    } catch (e) {
+      // 토큰 추출 에러
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    check(); // 컴포넌트가 마운트될 때 데이터 fetch 시작
+  }, []); // 빈 dependency array는 이 effect가 마운트와 언마운트 시에만 실행되게 함
 
   return (
     <View style={styles.container}>
@@ -51,7 +169,7 @@ const EmergencyNumberScreen = () => {
           style={{ flexDirection: 'row', marginLeft: 10, marginBottom: 20 }}
         >
           <TextInput
-            value={relation}
+            value={rel}
             style={styles.input}
             autoCapitalize={'none'}
             autoCorrect={false}
@@ -60,7 +178,7 @@ const EmergencyNumberScreen = () => {
             borderColor={SBTN.DARK}
             onBlur={() => setIsFocused(false)}
             onFocus={() => setIsFocused(true)}
-            onChangeText={(text) => setRelation(text.trim())}
+            onChangeText={(text) => setRel(text.trim())}
           />
           <View
             style={{
@@ -79,7 +197,7 @@ const EmergencyNumberScreen = () => {
               }
             >
               {sensitivityList.map((list, index) => (
-                <Picker.Item key={index} label={list} value={list} />
+                <Picker.Item key={index} label={`${list}단계`} value={list} />
               ))}
             </Picker>
           </View>
@@ -123,10 +241,10 @@ const EmergencyNumberScreen = () => {
         <View style={{ marginBottom: 30 }}>
           {list.map((item, index) => (
             <View style={styles.listContainer} key={index}>
-              <Text style={styles.listText}>{item.rel}</Text>
+              <Text style={styles.listText}>{item.relation}</Text>
               <View style={styles.listback}>
-                <Text style={styles.listText}>{item.number}</Text>
-                <Text style={[styles.listText]}>{item.sens}</Text>
+                <Text style={styles.listText}>{item.phoneNumber}</Text>
+                <Text style={[styles.listText]}>{item.level}단계</Text>
               </View>
               <Sbtn
                 styles2={{ title: { fontSize: 12 } }}
