@@ -2,19 +2,29 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { memo } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 
-const ListItem = memo(({ name, item }) => {
+const ListItem = memo(({ name, item, list }) => {
   const navigation = useNavigation();
+  const doubtList = list.map((obj) => obj.type);
   return (
     <Pressable
       onPress={() => {
-        // if (name !== 'CenterList') {
-        navigation.navigate('ListDetail', {
-          type: item.type,
-          registrationDate: item.registrationDate,
-          content: item.content,
-        });
-        // }
+        console.log(doubtList);
+        if (name == 'DoubtList') {
+          console.log(item.type);
+          navigation.navigate('Report', {
+            doubt: item.type,
+            num: item.phoneNumber,
+            doubtList: doubtList,
+          });
+        } else {
+          navigation.navigate('ListDetail', {
+            type: item.type,
+            registrationDate: item.registrationDate,
+            // content: item.content,
+          });
+        }
       }}
       hitSlop={10}
     >

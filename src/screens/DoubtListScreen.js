@@ -1,6 +1,7 @@
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import ListItem from '../components/ListItem';
 import { WHITE } from '../color';
+import { useState } from 'react';
+import ListItem from '../components/ListItem';
 
 const styles = StyleSheet.create({
   container: {
@@ -8,40 +9,30 @@ const styles = StyleSheet.create({
   },
 });
 const DoubtListScreen = () => {
-  const List = [
+  const [list, setList] = useState([
     {
-      id: 1,
-      task: ['2023-05-15 오후 7:33 통화내역', '2023-05-15'],
-      isDone: false,
+      type: '2023-05-15 오후 7:33 통화내역',
+      registrationDate: null,
+      phoneNumber: '0100333000',
     },
     {
-      id: 2,
-      task: ['2023-05-15 오후 7:33 통화내역', '2023-05-15'],
-      isDone: true,
+      type: '33323-05-15 오후 7:33 통화내역',
+      registrationDate: null,
+      phoneNumber: '01000099000',
     },
-    {
-      id: 3,
-      task: ['2023-05-15 오후 7:33 통화내역', '2023-05-15'],
-      isDone: false,
-    },
-    {
-      id: 4,
-      task: ['2023-05-15 오후 7:33 통화내역', '2023-05-15'],
-      isDone: true,
-    },
-  ];
+  ]);
 
-  return List.length ? (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={List}
-        renderItem={({ item }) => <ListItem item={item} />}
-        windowSize={5}
-        // ListHeaderComponent={() => <View style={{ height: 10 }}></View>}
-        ListHeaderComponent={View}
-        ListHeaderComponentStyle={{ height: 10 }}
-      />
-    </SafeAreaView>
+  return list.length ? (
+    <FlatList
+      data={list}
+      renderItem={({ item }) => (
+        <ListItem name="DoubtList" item={item} list={list} />
+      )}
+      windowSize={5}
+      // ListHeaderComponent={() => <View style={{ height: 10 }}></View>}
+      ListHeaderComponent={View}
+      ListHeaderComponentStyle={{ height: 10 }}
+    />
   ) : (
     <EmptyList />
   );

@@ -5,21 +5,62 @@ import IconText from '../components/IconText';
 import { Picker } from '@react-native-picker/picker';
 import { GRAY, PRIMARY, WHITE } from '../color';
 import Sbtn from '../components/Sbtn';
+import { url } from '../url';
+import * as SecureStore from 'expo-secure-store';
+import { useEffect } from 'react';
 
-const ReportScreen = () => {
-  const [select, setSelect] = useState(false);
+const ReportScreen = ({ route, navigation }) => {
+  const [select, setSelect] = useState(true);
   const [selectDoubt, setSelectDoubt] = useState(null);
-  //   const [doubtList, setDoubtList] = useState([]);
-  const [doubtList, setDoubtList] = useState([
-    '2023-04-25 오후 7:33 통화내역',
-    '2023-04-26 오후 10:33 통화내역',
-    '2023-04-27 오후 7:33 통화내역',
+  const doubtList = route.params ? route.params.doubtList : [];
+  // const [doubtList, setDoubtList] = useState([]); //통신으로 받아와야함
+  const [phoneNumber, setPhoneNumber] = useState(null);
+  const [type, setType] = useState(null);
+  const [typeList, setTypeList] = useState([
+    '사기',
+    '사칭',
+    '설치유도',
+    '사고빙자',
   ]);
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [reason, setReason] = useState(null);
-  const [reasonList, setReasonList] = useState(['대출 사기', '수사기관 사칭']);
-  const [report, setReport] = useState('');
+  const [content, setContent] = useState('');
+  const [doubtId, setDoubtId] = useState(''); //있을때 없을때 구분필요
+  const { doubt } = route.params;
+  const { num } = route.params;
 
+  useEffect(() => {
+    if (doubt && num) {
+      setSelectDoubt(doubt);
+      setPhoneNumber(num);
+    }
+  }, [doubt, num]);
+
+  const onReport = async () => {
+    try {
+      const token = await SecureStore.getItemAsync('Token');
+      if (token !== null) {
+        // 토큰을 사용하여 fetch 실행
+        fetch(`${url}/report/search`, {
+          method: 'POST',
+          body: JSON.stringify({
+            type: type,
+            content: content,
+            phoneNumber: phoneNumber,
+            voiceId: voiceId, //어떻게?
+            doubtId: doubtId, //어떻게?
+          }), // 여기 통신할거 json 형식으로 넣기
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, // 토큰 사용
+          },
+        }).catch((error) => {
+          console.error(error);
+        });
+      }
+    } catch (e) {
+      // 토큰 추출 에러
+      console.error(e);
+    }
+  };
   return (
     <ScrollView style={styles.container}>
       <ReportBox text="통화 후 의심 판정 여부" />
@@ -59,16 +100,16 @@ const ReportScreen = () => {
           style={styles.phone}
           value={phoneNumber}
           onChangeText={(text) => setPhoneNumber(text.trim())}
-          placeholder="- 빼고 적어주세요"
+          placeholder={phoneNumber == '' ? phoneNumber : '- 빼고 적어주세요'}
         />
       </View>
       <ReportBox text="신고 유형" />
       <Picker
         style={styles.picker}
-        selectedValue={reason}
-        onValueChange={(itemValue, itemIndex) => setReason(itemValue)}
+        selectedValue={type}
+        onValueChange={(itemValue, itemIndex) => setType(itemValue)}
       >
-        {reasonList.map((rl, index) => (
+        {typeList.map((rl, index) => (
           <Picker.Item key={index} label={rl} value={rl} />
         ))}
       </Picker>
@@ -76,12 +117,12 @@ const ReportScreen = () => {
       <View style={{ padding: 30 }}>
         <TextInput
           style={[styles.phone, { height: 150 }]}
-          value={report}
-          onChangeText={setReport}
+          value={content}
+          onChangeText={setContent}
           placeholder="자유롭게 적어주세요"
         />
       </View>
-      <Sbtn styles2={style2} title="신고" onPress={() => {}} />
+      <Sbtn styles2={style2} title="신고" onPress={onReport} />
     </ScrollView>
   );
 };
