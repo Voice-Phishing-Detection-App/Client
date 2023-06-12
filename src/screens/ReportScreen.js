@@ -13,8 +13,9 @@ const ReportScreen = ({ route, navigation }) => {
   const [select, setSelect] = useState(true);
   const [selectDoubt, setSelectDoubt] = useState(null);
   const doubtList = route.params ? route.params.doubtList : [];
-  // const [doubtList, setDoubtList] = useState([]); //통신으로 받아와야함
+  //그냥 선택해도 같이 전화번호 받아올 수 있어야함!
   const [phoneNumber, setPhoneNumber] = useState(null);
+  const [listNumber, setListNumber] = useState([]);
   const [type, setType] = useState(null);
   const [typeList, setTypeList] = useState([
     '사기',
@@ -31,6 +32,32 @@ const ReportScreen = ({ route, navigation }) => {
     if (doubt && num) {
       setSelectDoubt(doubt);
       setPhoneNumber(num);
+    } else {
+      try {
+        const token = SecureStore.getItemAsync('Token');
+        if (token !== null) {
+          // 토큰을 사용하여 fetch 실행
+          fetch(`${url}/report/get`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`, // 토큰 사용
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              // API 응답 처리
+              const list = data; //이게 되나?
+              setContent(list.map((obj) => obj.content)); //content는 안쓰는데 예시로
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        }
+      } catch (e) {
+        // 토큰 추출 에러
+        console.error(e);
+      }
     }
   }, [doubt, num]);
 
@@ -39,10 +66,10 @@ const ReportScreen = ({ route, navigation }) => {
       const token = await SecureStore.getItemAsync('Token');
       if (token !== null) {
         // 토큰을 사용하여 fetch 실행
-        fetch(`${url}/report/search`, {
+        fetch(`${url}/report/add`, {
           method: 'POST',
           body: JSON.stringify({
-            type: type,
+            type: type, //바꿔야함 영어뭐시기로
             content: content,
             phoneNumber: phoneNumber,
             voiceId: voiceId, //어떻게?
