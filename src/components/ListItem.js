@@ -8,20 +8,20 @@ const ListItem = memo(({ name, item }) => {
   return (
     <Pressable
       onPress={() => {
-        if (name === 'PhisingList') {
-          navigation.navigate('PhisingListDetail', {
-            title: item.task[0],
-            date: item.task[1],
-            detail: item.task[2],
-          });
-        }
+        // if (name !== 'CenterList') {
+        navigation.navigate('ListDetail', {
+          type: item.type,
+          registrationDate: item.registrationDate,
+          content: item.content,
+        });
+        // }
       }}
       hitSlop={10}
     >
       {/* <Pressable onPress={() => {}} hitSlop={10}>
         <MaterialCommunityIcons {...checkboxProps} />
       </Pressable> */}
-      {name === 'CenterList' ? (
+      {/* {name === 'CenterList' ? (
         <View style={styles.container}>
           <View style={styles.centerlist}>
             <Text style={styles.task1txt}>{item.task[0]}</Text>
@@ -29,27 +29,36 @@ const ListItem = memo(({ name, item }) => {
             <Text style={styles.task1txt}>{item.task[1]}</Text>
           </View>
         </View>
-      ) : (
-        <View style={styles.container}>
-          <View style={styles.task1}>
-            <Text style={styles.task1txt}>{item.task[0]}</Text>
-          </View>
-          <View style={styles.task2}>
-            <Text>{item.task[1]}</Text>
-          </View>
+      ) : ( */}
+      <View style={styles.container}>
+        <View style={styles.task1}>
+          <Text style={styles.task1txt}>{item.type}</Text>
         </View>
-      )}
+        <View style={styles.task2}>
+          <Text>{item.registrationDate}</Text>
+        </View>
+      </View>
+      {/* )} */}
     </Pressable>
   );
 });
 ListItem.displayName = 'ListItem';
-ListItem.defaultProps = {
-  name: 'default',
-};
 ListItem.propTypes = {
   name: PropTypes.string.isRequired,
-  item: PropTypes.object.isRequired,
+  item: PropTypes.shape({
+    content: PropTypes.string.isRequired,
+    phoneNumber: PropTypes.string.isRequired,
+    registrationDate: PropTypes.oneOfType([
+      PropTypes.instanceOf(Date),
+      PropTypes.oneOf([null]),
+    ]),
+    reportId: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    userId: PropTypes.number.isRequired,
+    voiceId: PropTypes.number.isRequired,
+  }).isRequired,
 };
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',

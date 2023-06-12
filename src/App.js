@@ -7,10 +7,10 @@ import TestStack from './navigations/TestStack';
 
 const App = () => {
   return (
-    // <UserProvider>
+    // <>
     //   <StatusBar style="auto" />
     //   <Navigation />
-    // </UserProvider>
+    // </>
     // <NavigationContainer>
     //   <StatusBar style="auto" />
     //   <AuthStack />

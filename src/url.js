@@ -1,1 +1,1 @@
-export const url = 'http://172.30.1.32:8080';
+export const url = 'https://5033-165-229-125-38.ngrok-free.app';

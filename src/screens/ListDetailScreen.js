@@ -2,23 +2,23 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import { GRAY } from '../color';
 import PropTypes from 'prop-types';
 
-const PhisingListDetailScreen = ({ route, navigation }) => {
-  const { title } = route.params;
-  const { date } = route.params;
-  const { detail } = route.params;
+const ListDetailScreen = ({ route, navigation }) => {
+  const { type } = route.params;
+  const { registrationDate } = route.params;
+  const { content } = route.params;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}>{type}</Text>
       <View style={styles.dateview}>
-        <Text style={styles.date}>{date}</Text>
+        <Text style={styles.date}>{registrationDate}</Text>
       </View>
 
-      <Text style={styles.detail}>{detail}</Text>
+      <Text style={styles.content}>{content}</Text>
     </View>
   );
 };
-PhisingListDetailScreen.propTypes = {};
+ListDetailScreen.propTypes = {};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     marginTop: 15,
   },
-  detail: {
+  content: {
     fontSize: 15,
     marginHorizontal: 25,
     paddingVertical: 25,
@@ -48,4 +48,4 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
 });
-export default PhisingListDetailScreen;
+export default ListDetailScreen;
