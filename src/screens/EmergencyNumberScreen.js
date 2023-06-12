@@ -75,6 +75,7 @@ const EmergencyNumberScreen = () => {
           .then((data) => {
             Alert.alert('등록 성공');
             console.log('add 성공: ' + data);
+            check();
           })
           .catch((error) => {
             console.error('add 실패: ' + error);
@@ -103,7 +104,6 @@ const EmergencyNumberScreen = () => {
           .then((data) => {
             console.log('list 성공: ' + data);
             setList(data);
-            check();
           })
           .catch((error) => {
             console.error('list 실패: ' + error);
@@ -115,19 +115,16 @@ const EmergencyNumberScreen = () => {
     }
   };
 
-  // 긴급연락처 수정
-  const update = async () => {
+  // 긴급연락처 삭제
+  const _delete = async (sosId) => {
     try {
       const token = await SecureStore.getItemAsync('Token');
       if (token !== null) {
         // 토큰을 사용하여 fetch 실행
-        fetch(`${url}/sos/update`, {
+        fetch(`${url}/sos/delete`, {
           method: 'POST',
           body: JSON.stringify({
-            sosId: 1,
-            phoneNumber: phone,
-            relation: rel,
-            level: sensitivity,
+            sosId: sosId,
           }),
           headers: {
             'Content-Type': 'application/json',
@@ -138,10 +135,14 @@ const EmergencyNumberScreen = () => {
             response.status;
           })
           .then((data) => {
-            console.log('add 성공: ' + data);
+            console.log('delete 성공: ' + data);
+            Alert.alert('삭제 성공');
+            const updatedList = list.filter((item) => item.sosId !== sosId);
+            setList(updatedList);
+            check();
           })
           .catch((error) => {
-            console.error('add 실패: ' + error);
+            console.error('delete 실패: ' + error);
           });
       }
     } catch (e) {
@@ -257,7 +258,7 @@ const EmergencyNumberScreen = () => {
                   container: { backgroundColor: '#92B8E5' },
                 }}
                 title={'삭제'}
-                onPress={() => {}}
+                onPress={() => _delete(item.sosId)}
               />
             </View>
           ))}
