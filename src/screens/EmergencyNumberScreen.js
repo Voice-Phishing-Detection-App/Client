@@ -51,9 +51,10 @@ const EmergencyNumberScreen = () => {
   };
 
   // 통신
-  // 긴급연락처 추가, 조회
+  // 긴급연락처 추가, 수정
   const add = async () => {
     if (editingSosId === null) {
+      // 추가
       try {
         const token = await SecureStore.getItemAsync('Token');
         if (token !== null) {
@@ -87,6 +88,7 @@ const EmergencyNumberScreen = () => {
         console.error(e);
       }
     } else {
+      // 수정
       try {
         const token = await SecureStore.getItemAsync('Token');
         if (token !== null) {
