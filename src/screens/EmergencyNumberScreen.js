@@ -51,39 +51,91 @@ const EmergencyNumberScreen = () => {
   };
 
   // 통신
-  // 긴급연락처 추가
+  // 긴급연락처 추가, 조회
   const add = async () => {
-    try {
-      const token = await SecureStore.getItemAsync('Token');
-      if (token !== null) {
-        // 토큰을 사용하여 fetch 실행
-        fetch(`${url}/sos/add`, {
-          method: 'POST',
-          body: JSON.stringify({
-            phoneNumber: phone,
-            relation: rel,
-            level: sensitivity,
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`, // 토큰 사용
-          },
-        })
-          .then((response) => {
-            response.status;
+    if (editingSosId === null) {
+      try {
+        const token = await SecureStore.getItemAsync('Token');
+        if (token !== null) {
+          // 토큰을 사용하여 fetch 실행
+          fetch(`${url}/sos/add`, {
+            method: 'POST',
+            body: JSON.stringify({
+              phoneNumber: phone,
+              relation: rel,
+              level: sensitivity,
+            }),
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`, // 토큰 사용
+            },
           })
-          .then((data) => {
-            Alert.alert('등록 성공');
-            console.log('add 성공: ' + data);
-            check();
-          })
-          .catch((error) => {
-            console.error('add 실패: ' + error);
-          });
+            .then((response) => {
+              response.status;
+            })
+            .then((data) => {
+              Alert.alert('등록 성공');
+              console.log('add 성공: ' + data);
+              check();
+            })
+            .catch((error) => {
+              console.error('add 실패: ' + error);
+            });
+        }
+      } catch (e) {
+        // 토큰 추출 에러
+        console.error(e);
       }
-    } catch (e) {
-      // 토큰 추출 에러
-      console.error(e);
+    } else {
+      try {
+        const token = await SecureStore.getItemAsync('Token');
+        if (token !== null) {
+          // 토큰을 사용하여 fetch 실행
+          fetch(`${url}/sos/update`, {
+            method: 'POST',
+            body: JSON.stringify({
+              sosId: editingSosId,
+              phoneNumber: phone,
+              relation: rel,
+              level: sensitivity,
+            }),
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`, // 토큰 사용
+            },
+          })
+            .then((response) => {
+              response.status;
+            })
+            .then((data) => {
+              Alert.alert('수정 성공');
+              console.log('update 성공: ' + data);
+              // 수정이 성공한 후, 해당 항목을 업데이트합니다.
+              const updatedList = list.map((item) => {
+                if (item.sosId === editingSosId) {
+                  return {
+                    ...item,
+                    relation: rel,
+                    level: sensitivity,
+                    phoneNumber: phone,
+                  };
+                }
+                return item;
+              });
+              setList(updatedList);
+              setEditingSosId(null);
+              setRel('');
+              setSensitivity(null);
+              setPhone('');
+            })
+            .catch((error) => {
+              console.error('update 실패: ' + error);
+            });
+        }
+      } catch (e) {
+        // 토큰 추출 에러
+        console.error(e);
+      }
     }
   };
 
