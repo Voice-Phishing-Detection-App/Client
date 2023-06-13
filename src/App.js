@@ -7,18 +7,18 @@ import TestStack from './navigations/TestStack';
 
 const App = () => {
   return (
-    <>
-      <StatusBar style="auto" />
-      <Navigation />
-    </>
+    // <>
+    //   <StatusBar style="auto" />
+    //   <Navigation />
+    // </>
     // <NavigationContainer>
     //   <StatusBar style="auto" />
     //   <AuthStack />
     // </NavigationContainer>
-    // <UserProvider>
-    //   <StatusBar style="auto" />
-    //   <TestStack />
-    // </UserProvider>
+    <UserProvider>
+      <StatusBar style="auto" />
+      <TestStack />
+    </UserProvider>
   );
 };
 

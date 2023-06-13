@@ -6,23 +6,21 @@ import { useState } from 'react';
 
 const ListItem = memo(({ name, item, list }) => {
   const navigation = useNavigation();
-  const doubtList = list.map((obj) => obj.type);
+  // const doubtList = list.map((obj) => obj.type);
   return (
     <Pressable
       onPress={() => {
-        console.log(doubtList);
         if (name == 'DoubtList') {
-          console.log(item.type);
+          console.log('listitem:', item);
           navigation.navigate('Report', {
-            doubt: item.type,
-            num: item.phoneNumber,
-            doubtList: doubtList,
+            doubtId: item.doubtId,
+            // doubtList: doubtList,
           });
         } else {
           navigation.navigate('ListDetail', {
-            type: item.type,
+            type: item.type, //임시임
             registrationDate: item.registrationDate,
-            // content: item.content,
+            content: item.content,
           });
         }
       }}
@@ -53,21 +51,6 @@ const ListItem = memo(({ name, item, list }) => {
   );
 });
 ListItem.displayName = 'ListItem';
-ListItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  item: PropTypes.shape({
-    content: PropTypes.string.isRequired,
-    phoneNumber: PropTypes.string.isRequired,
-    registrationDate: PropTypes.oneOfType([
-      PropTypes.instanceOf(Date),
-      PropTypes.oneOf([null]),
-    ]),
-    reportId: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    userId: PropTypes.number.isRequired,
-    voiceId: PropTypes.number.isRequired,
-  }).isRequired,
-};
 
 const styles = StyleSheet.create({
   container: {

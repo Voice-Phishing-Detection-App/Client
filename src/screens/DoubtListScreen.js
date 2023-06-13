@@ -2,26 +2,46 @@ import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { WHITE } from '../color';
 import { useState } from 'react';
 import ListItem from '../components/ListItem';
+import { useEffect } from 'react';
+import EmptyList from '../components/EmptyList';
+import { url } from '../url';
+import * as SecureStore from 'expo-secure-store';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
 });
-const DoubtListScreen = () => {
-  const [list, setList] = useState([
-    {
-      type: '2023-05-15 오후 7:33 통화내역',
-      registrationDate: null,
-      phoneNumber: '0100333000',
-    },
-    {
-      type: '33323-05-15 오후 7:33 통화내역',
-      registrationDate: null,
-      phoneNumber: '01000099000',
-    },
-  ]);
 
+const DoubtListScreen = () => {
+  const [list, setList] = useState([]);
+  useEffect(() => {
+    try {
+      const token = SecureStore.getItemAsync('Token');
+      if (token !== null) {
+        // 토큰을 사용하여 fetch 실행
+        fetch(`${url}/doubt/get`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, // 토큰 사용
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // API 응답 처리
+            console.log('doubtlistpage:', data);
+            setList(data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    } catch (e) {
+      // 토큰 추출 에러
+      console.error(e);
+    }
+  }, []);
   return list.length ? (
     <FlatList
       data={list}

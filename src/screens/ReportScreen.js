@@ -12,33 +12,79 @@ import { useEffect } from 'react';
 const ReportScreen = ({ route, navigation }) => {
   const [select, setSelect] = useState(true);
   const [selectDoubt, setSelectDoubt] = useState(null);
-  const doubtList = route.params ? route.params.doubtList : [];
+  const [doubtList, setDoubtList] = useState([]);
   //그냥 선택해도 같이 전화번호 받아올 수 있어야함!
   const [phoneNumber, setPhoneNumber] = useState(null);
-  const [listNumber, setListNumber] = useState([]);
   const [type, setType] = useState(null);
+  const [ktype, setKType] = useState(null);
   const [typeList, setTypeList] = useState([
+    'REPORT_TYPE_FRAUD',
+    'REPORT_TYPE_IMPERSONATING',
+    'REPORT_TYPE_INDUCE',
+    'REPORT_TYPE_DISGUISE',
+  ]);
+  const [ktypeList, setKTypeList] = useState([
     '사기',
     '사칭',
     '설치유도',
     '사고빙자',
   ]);
   const [content, setContent] = useState('');
-  const [doubtId, setDoubtId] = useState(''); //있을때 없을때 구분필요
-  const { doubt } = route.params;
-  const { num } = route.params;
-
+  const [doubtId, setDoubtId] = useState(route.params); //있을때 없을때 구분필요
+  const token = SecureStore.getItemAsync('Token');
+  const [filteredObject, setFilteredObject] = useState([]);
   useEffect(() => {
-    if (doubt && num) {
-      setSelectDoubt(doubt);
-      setPhoneNumber(num);
-    } else {
-      try {
-        const token = SecureStore.getItemAsync('Token');
-        if (token !== null) {
-          // 토큰을 사용하여 fetch 실행
-          fetch(`${url}/report/get`, {
-            method: 'GET',
+    console.log('id:', doubtId);
+    try {
+      if (doubtId !== undefined) {
+        //doubtlist 돌면서 doubtID같은거 찾아서 그 안에 있는 object 만 가져오기
+        // doubtId와 일치하는 객체만 가져오기
+        setFilteredObject(doubtList.find((item) => item.doubtId === doubtId));
+        // filteredObject를 이용하여 원하는 작업을 수행합니다.
+        // 예를 들어, filteredObject의 title 값을 출력하고 싶다면:
+        console.log(filteredObject.title);
+      }
+      if (token !== null) {
+        // 토큰을 사용하여 fetch 실행
+        fetch(`${url}/report/get`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, // 토큰 사용
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // API 응답 처리
+            //반복문 돌면서 ? doubtID같은거?
+            setDoubtList(data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    } catch (e) {
+      // 토큰 추출 에러
+      console.error(e);
+    }
+  }, []);
+
+  const onReport = async () => {
+    console.log('신고');
+    try {
+      if (token !== null) {
+        // 토큰을 사용하여 fetch 실행
+        if (select) {
+          fetch(`${url}/report/add`, {
+            method: 'POST',
+            body: JSON.stringify({
+              type: type, //바꿔야함 영어뭐시기로
+              title: filteredObject.title,
+              content: content,
+              phoneNumber: filteredObject.phoneNumber, //수정필요
+              voiceId: filteredObject.voiceId, //수정필요
+              doubtId: doubtId,
+            }), // 여기 통신할거 json 형식으로 넣기
             headers: {
               'Content-Type': 'application/json',
               Authorization: `Bearer ${token}`, // 토큰 사용
@@ -47,41 +93,34 @@ const ReportScreen = ({ route, navigation }) => {
             .then((response) => response.json())
             .then((data) => {
               // API 응답 처리
-              const list = data; //이게 되나?
-              setContent(list.map((obj) => obj.content)); //content는 안쓰는데 예시로
+              console.log(data);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        } else {
+          fetch(`${url}/report/add/withoutDoubt`, {
+            method: 'POST',
+            body: JSON.stringify({
+              type: type, //바꿔야함 영어뭐시기로
+              title: selectDoubt,
+              content: content,
+              phoneNumber: phoneNumber,
+            }), // 여기 통신할거 json 형식으로 넣기
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`, // 토큰 사용
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              // API 응답 처리
+              console.log(data);
             })
             .catch((error) => {
               console.error(error);
             });
         }
-      } catch (e) {
-        // 토큰 추출 에러
-        console.error(e);
-      }
-    }
-  }, [doubt, num]);
-
-  const onReport = async () => {
-    try {
-      const token = await SecureStore.getItemAsync('Token');
-      if (token !== null) {
-        // 토큰을 사용하여 fetch 실행
-        fetch(`${url}/report/add`, {
-          method: 'POST',
-          body: JSON.stringify({
-            type: type, //바꿔야함 영어뭐시기로
-            content: content,
-            phoneNumber: phoneNumber,
-            voiceId: voiceId, //어떻게?
-            doubtId: doubtId, //어떻게?
-          }), // 여기 통신할거 json 형식으로 넣기
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`, // 토큰 사용
-          },
-        }).catch((error) => {
-          console.error(error);
-        });
       }
     } catch (e) {
       // 토큰 추출 에러
@@ -113,7 +152,10 @@ const ReportScreen = ({ route, navigation }) => {
           <Picker
             style={styles.picker}
             selectedValue={selectDoubt}
-            onValueChange={(itemValue, itemIndex) => setSelectDoubt(itemValue)}
+            onValueChange={(itemValue, itemIndex) => {
+              setSelectDoubt(itemValue);
+              setPhoneNumber(listNumber[itemIndex]);
+            }}
           >
             {doubtList.map((doubt, index) => (
               <Picker.Item key={index} label={doubt} value={doubt} />
@@ -133,10 +175,13 @@ const ReportScreen = ({ route, navigation }) => {
       <ReportBox text="신고 유형" />
       <Picker
         style={styles.picker}
-        selectedValue={type}
-        onValueChange={(itemValue, itemIndex) => setType(itemValue)}
+        selectedValue={ktype}
+        onValueChange={(itemValue, itemIndex) => {
+          setType(typeList[itemIndex]);
+          setKType(itemValue);
+        }}
       >
-        {typeList.map((rl, index) => (
+        {ktypeList.map((rl, index) => (
           <Picker.Item key={index} label={rl} value={rl} />
         ))}
       </Picker>
