@@ -1,17 +1,19 @@
-import { useUserContext } from '../contexts/UserContext';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import MainStack from './MainStack';
 import AuthStack from './AuthStack';
-import { NavigationContainer } from '@react-navigation/native';
-import DoubtListScreen from '../screens/DoubtListScreen';
+const RootStack = createStackNavigator();
 
 const Navigation = () => {
-  // const { user } = useUserContext();
   return (
     <NavigationContainer>
-      {/* {user ? <MainStack /> : <AuthStack />} */}
-      <MainStack />
-      {/* <DoubtListScreen /> */}
-      {/* <Navigation /> */}
+      <RootStack.Navigator
+        initialRouteName="Auth"
+        screenOptions={{ headerShown: false }}
+      >
+        <RootStack.Screen name="Auth" component={AuthStack} />
+        <RootStack.Screen name="Main" component={MainStack} />
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 };

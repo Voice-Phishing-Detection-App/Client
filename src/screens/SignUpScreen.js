@@ -37,6 +37,7 @@ const SignUpScreen = ({ navigation }) => {
         })
           .then((response) => response.json())
           .then((data) => {
+            navigation.navigate('Auth');
             console.log(data); // id가 반환
           })
           .catch((error) => {
