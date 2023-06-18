@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import Sbtn from '../components/Sbtn';
 import AppModal from '../components/AppModal';
 import { useState } from 'react';
+import * as SecureStore from 'expo-secure-store';
 
 const MyPageScreen = () => {
   const user = '신혜민';
@@ -18,6 +19,11 @@ const MyPageScreen = () => {
 
   const toggleModal = () => {
     setModalVisible(!modalVisible); // 모달 가시성 토글 함수 정의
+  };
+
+  const logout = async () => {
+    await SecureStore.deleteItemAsync('Token');
+    navigation.navigate('Auth');
   };
 
   return (
@@ -62,7 +68,7 @@ const MyPageScreen = () => {
             <Text style={styles.text}>알림 설정</Text>
           </View>
         </Pressable>
-        <Pressable onPress={() => {}} hitSlop={10}>
+        <Pressable onPress={logout} hitSlop={10}>
           <View style={styles.textContainer}>
             <Text style={styles.text}>로그아웃</Text>
           </View>
