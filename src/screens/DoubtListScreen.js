@@ -1,47 +1,58 @@
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import ListItem from '../components/ListItem';
 import { WHITE } from '../color';
+import { useState } from 'react';
+import ListItem from '../components/ListItem';
+import { useEffect } from 'react';
+import EmptyList from '../components/EmptyList';
+import { url } from '../url';
+import * as SecureStore from 'expo-secure-store';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
 });
-const DoubtListScreen = () => {
-  const List = [
-    {
-      id: 1,
-      task: ['2023-05-15 오후 7:33 통화내역', '2023-05-15'],
-      isDone: false,
-    },
-    {
-      id: 2,
-      task: ['2023-05-15 오후 7:33 통화내역', '2023-05-15'],
-      isDone: true,
-    },
-    {
-      id: 3,
-      task: ['2023-05-15 오후 7:33 통화내역', '2023-05-15'],
-      isDone: false,
-    },
-    {
-      id: 4,
-      task: ['2023-05-15 오후 7:33 통화내역', '2023-05-15'],
-      isDone: true,
-    },
-  ];
 
-  return List.length ? (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={List}
-        renderItem={({ item }) => <ListItem item={item} />}
-        windowSize={5}
-        // ListHeaderComponent={() => <View style={{ height: 10 }}></View>}
-        ListHeaderComponent={View}
-        ListHeaderComponentStyle={{ height: 10 }}
-      />
-    </SafeAreaView>
+const DoubtListScreen = () => {
+  const [list, setList] = useState([]);
+  useEffect(() => {
+    try {
+      const token = SecureStore.getItemAsync('Token');
+      if (token !== null) {
+        // 토큰을 사용하여 fetch 실행
+        fetch(`${url}/doubt/get`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, // 토큰 사용
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // API 응답 처리
+            console.log('doubtlistpage:', data);
+            setList(data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    } catch (e) {
+      // 토큰 추출 에러
+      console.error(e);
+    }
+  }, []);
+  return list.length ? (
+    <FlatList
+      data={list}
+      renderItem={({ item }) => (
+        <ListItem name="DoubtList" item={item} list={list} />
+      )}
+      windowSize={5}
+      // ListHeaderComponent={() => <View style={{ height: 10 }}></View>}
+      ListHeaderComponent={View}
+      ListHeaderComponentStyle={{ height: 10 }}
+    />
   ) : (
     <EmptyList />
   );

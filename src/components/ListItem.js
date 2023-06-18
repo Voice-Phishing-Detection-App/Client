@@ -2,17 +2,25 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { memo } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 
-const ListItem = memo(({ name, item }) => {
+const ListItem = memo(({ name, item, list }) => {
   const navigation = useNavigation();
+  // const doubtList = list.map((obj) => obj.type);
   return (
     <Pressable
       onPress={() => {
-        if (name === 'PhisingList') {
-          navigation.navigate('PhisingListDetail', {
-            title: item.task[0],
-            date: item.task[1],
-            detail: item.task[2],
+        if (name == 'DoubtList') {
+          console.log('listitem:', item);
+          navigation.navigate('Report', {
+            doubtId: item.doubtId,
+            // doubtList: doubtList,
+          });
+        } else {
+          navigation.navigate('ListDetail', {
+            type: item.type, //임시임
+            registrationDate: item.registrationDate,
+            content: item.content,
           });
         }
       }}
@@ -21,7 +29,7 @@ const ListItem = memo(({ name, item }) => {
       {/* <Pressable onPress={() => {}} hitSlop={10}>
         <MaterialCommunityIcons {...checkboxProps} />
       </Pressable> */}
-      {name === 'CenterList' ? (
+      {/* {name === 'CenterList' ? (
         <View style={styles.container}>
           <View style={styles.centerlist}>
             <Text style={styles.task1txt}>{item.task[0]}</Text>
@@ -29,27 +37,21 @@ const ListItem = memo(({ name, item }) => {
             <Text style={styles.task1txt}>{item.task[1]}</Text>
           </View>
         </View>
-      ) : (
-        <View style={styles.container}>
-          <View style={styles.task1}>
-            <Text style={styles.task1txt}>{item.task[0]}</Text>
-          </View>
-          <View style={styles.task2}>
-            <Text>{item.task[1]}</Text>
-          </View>
+      ) : ( */}
+      <View style={styles.container}>
+        <View style={styles.task1}>
+          <Text style={styles.task1txt}>{item.type}</Text>
         </View>
-      )}
+        <View style={styles.task2}>
+          <Text>{item.registrationDate}</Text>
+        </View>
+      </View>
+      {/* )} */}
     </Pressable>
   );
 });
 ListItem.displayName = 'ListItem';
-ListItem.defaultProps = {
-  name: 'default',
-};
-ListItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  item: PropTypes.object.isRequired,
-};
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
