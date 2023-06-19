@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import Voice from '@react-native-voice/voice';
 
-const SttVoice = () => {
+const SpeechToText = () => {
   const [transcript, setTranscript] = useState('');
 
   useEffect(() => {
@@ -99,4 +99,4 @@ const SttVoice = () => {
   );
 };
 
-export default SttVoice;
+export default SpeechToText;
