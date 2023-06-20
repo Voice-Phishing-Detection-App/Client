@@ -5,8 +5,12 @@ import {
   Alert,
   PermissionsAndroid,
   Platform,
+  View,
+  StyleSheet,
+  Pressable,
 } from 'react-native';
 import Voice from '@react-native-voice/voice';
+import { FontAwesome } from '@expo/vector-icons';
 
 const SpeechToText = () => {
   const [transcript, setTranscript] = useState('');
@@ -97,12 +101,39 @@ const SpeechToText = () => {
   }, []);
 
   return (
-    <>
-      <Button title="Start Listening" onPress={startListening} />
-      <Button title="Stop Listening" onPress={stopListening} />
-      <Text>{transcript}</Text>
-    </>
+    <View style={styles.container}>
+      <Pressable style={styles.button} onPress={startListening}>
+        <Text style={{ color: '#ffffff' }}>음성 시작</Text>
+      </Pressable>
+      <Pressable style={styles.button} onPress={stopListening}>
+        <Text style={{ color: '#ffffff' }}>음성 종료</Text>
+      </Pressable>
+      <View style={styles.textbox}>
+        <Text>{transcript}</Text>
+      </View>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  button: {
+    width: 100,
+    height: 50,
+    backgroundColor: '#000000',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textbox: {
+    width: 400,
+    height: 400,
+    borderWidth: 1,
+    marginTop: 40,
+  },
+});
 
 export default SpeechToText;
