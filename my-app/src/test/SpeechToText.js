@@ -65,13 +65,15 @@ const SpeechToText = () => {
 
   const sendToServer = async (text) => {
     try {
-      let response = await fetch(``, {
+      let response = await fetch(`http://172.30.1.65:8080/doubt`, {
         method: 'POST',
         body: JSON.stringify({
-          transcript: text,
+          phoneNumber: '01000000000',
+          text: transcript,
         }),
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY4NzI0Mjc1NiwiZXhwIjoxNjg3MjQ5NzU2fQ.L1ge7dFygn08EeCFT0tG1gjBWBUQCVjrL90v_QTnhfsYmki_kU7--UCOzAsP5B1TscJ8RIlC_CA8vY97btRs6w`,
         },
       });
 
