@@ -10,6 +10,7 @@ import MyReportListScreen from '../screens/MyReportListScreen';
 import ListDetailScreen from '../screens/ListDetailScreen';
 import HeaderLeftBack from '../components/HeaderLeftBack';
 import SearchListScreen from '../screens/SearchListScreen';
+import BannerScreen from '../screens/BannerScreen';
 const Stack = createNativeStackNavigator();
 //로그인 후 컴포넌트
 const MainStack = () => {
@@ -144,6 +145,7 @@ const MainStack = () => {
           },
         }}
       />
+      <Stack.Screen name="Banner" component={BannerScreen} />
     </Stack.Navigator>
   );
 };

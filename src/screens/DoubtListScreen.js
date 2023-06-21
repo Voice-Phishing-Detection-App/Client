@@ -16,8 +16,11 @@ const styles = StyleSheet.create({
 const DoubtListScreen = () => {
   const [list, setList] = useState([]);
   useEffect(() => {
+    check();
+  }, []);
+  const check = async () => {
     try {
-      const token = SecureStore.getItemAsync('Token');
+      const token = await SecureStore.getItemAsync('Token');
       if (token !== null) {
         // 토큰을 사용하여 fetch 실행
         fetch(`${url}/doubt/get`, {
@@ -41,13 +44,12 @@ const DoubtListScreen = () => {
       // 토큰 추출 에러
       console.error(e);
     }
-  }, []);
+  };
+
   return list.length ? (
     <FlatList
       data={list}
-      renderItem={({ item }) => (
-        <ListItem name="DoubtList" item={item} list={list} />
-      )}
+      renderItem={({ item }) => <ListItem name="DoubtList" item={item} />}
       windowSize={5}
       // ListHeaderComponent={() => <View style={{ height: 10 }}></View>}
       ListHeaderComponent={View}

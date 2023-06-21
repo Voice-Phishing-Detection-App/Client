@@ -10,12 +10,13 @@ import * as SecureStore from 'expo-secure-store';
 import { useEffect } from 'react';
 
 const ReportScreen = ({ route, navigation }) => {
+  const { id } = route.params || 0;
   const [select, setSelect] = useState(true);
   const [selectDoubt, setSelectDoubt] = useState(null);
   const [doubtList, setDoubtList] = useState([]);
   //그냥 선택해도 같이 전화번호 받아올 수 있어야함!
   const [phoneNumber, setPhoneNumber] = useState(null);
-  const [type, setType] = useState(null);
+  const [type, setType] = useState('REPORT_TYPE_FRAUD');
   const [ktype, setKType] = useState(null);
   const [typeList, setTypeList] = useState([
     'REPORT_TYPE_FRAUD',
@@ -30,23 +31,19 @@ const ReportScreen = ({ route, navigation }) => {
     '사고빙자',
   ]);
   const [content, setContent] = useState('');
-  const [doubtId, setDoubtId] = useState(route.params); //있을때 없을때 구분필요
-  const token = SecureStore.getItemAsync('Token');
+  const [list, setList] = useState([]);
   const [filteredObject, setFilteredObject] = useState([]);
+
   useEffect(() => {
-    console.log('id:', doubtId);
+    console.log('id ', id);
+    check();
+  }, [id]);
+  const check = async () => {
     try {
-      if (doubtId !== undefined) {
-        //doubtlist 돌면서 doubtID같은거 찾아서 그 안에 있는 object 만 가져오기
-        // doubtId와 일치하는 객체만 가져오기
-        setFilteredObject(doubtList.find((item) => item.doubtId === doubtId));
-        // filteredObject를 이용하여 원하는 작업을 수행합니다.
-        // 예를 들어, filteredObject의 title 값을 출력하고 싶다면:
-        console.log(filteredObject.title);
-      }
+      const token = await SecureStore.getItemAsync('Token');
       if (token !== null) {
         // 토큰을 사용하여 fetch 실행
-        fetch(`${url}/report/get`, {
+        fetch(`${url}/doubt/get`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -57,7 +54,31 @@ const ReportScreen = ({ route, navigation }) => {
           .then((data) => {
             // API 응답 처리
             //반복문 돌면서 ? doubtID같은거?
-            setDoubtList(data);
+            console.log(data);
+            setList(data);
+            console.log(list);
+            const doubtlist = list.map((item) => item.title);
+            setDoubtList(doubtlist);
+            setPhoneNumber(doubtlist.phoneNumber);
+            console.log('list: ', doubtlist);
+            console.log('list: ', doubtList);
+            if (id) {
+              setFilteredObject(list.find((item) => item.doubtId === id));
+            }
+
+            // console.log('id:', id);
+            //이거는 의심내역 클릭해서 넘어왔을때!
+            // if (id) {
+            //doubtlist 돌면서 doubtID같은거 찾아서 그 안에 있는 object 만 가져오기
+            // doubtId와 일치하는 객체만 가져오기
+            // console.log(doubtList);
+
+            // filteredObject를 이용하여 원하는 작업을 수행합니다.
+            // 예를 들어, filteredObject의 title 값을 출력하고 싶다면:
+            // console.log('A');
+            // console.log(filteredObject);
+            // console.log(filteredObject.title);
+            // }
           })
           .catch((error) => {
             console.error(error);
@@ -67,60 +88,77 @@ const ReportScreen = ({ route, navigation }) => {
       // 토큰 추출 에러
       console.error(e);
     }
-  }, []);
+  };
 
-  const onReport = async () => {
-    console.log('신고');
+  const onReport = () => {
+    if (select) {
+      add();
+    } else {
+      addWithout();
+    }
+  };
+
+  const add = async () => {
     try {
+      const token = await SecureStore.getItemAsync('Token');
       if (token !== null) {
         // 토큰을 사용하여 fetch 실행
-        if (select) {
-          fetch(`${url}/report/add`, {
-            method: 'POST',
-            body: JSON.stringify({
-              type: type, //바꿔야함 영어뭐시기로
-              title: filteredObject.title,
-              content: content,
-              phoneNumber: filteredObject.phoneNumber, //수정필요
-              voiceId: filteredObject.voiceId, //수정필요
-              doubtId: doubtId,
-            }), // 여기 통신할거 json 형식으로 넣기
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`, // 토큰 사용
-            },
+        fetch(`${url}/report/add`, {
+          method: 'POST',
+          body: JSON.stringify({
+            type: type, //바꿔야함 영어뭐시기로
+            title: filteredObject.title,
+            content: content,
+            phoneNumber: filteredObject.phoneNumber, //수정필요
+            voiceId: filteredObject.voice_id, //수정필요
+            doubtId: filteredObject.doubtId,
+          }), // 여기 통신할거 json 형식으로 넣기
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, // 토큰 사용
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // API 응답 처리
+            console.log(data);
           })
-            .then((response) => response.json())
-            .then((data) => {
-              // API 응답 처리
-              console.log(data);
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        } else {
-          fetch(`${url}/report/add/withoutDoubt`, {
-            method: 'POST',
-            body: JSON.stringify({
-              type: type, //바꿔야함 영어뭐시기로
-              title: selectDoubt,
-              content: content,
-              phoneNumber: phoneNumber,
-            }), // 여기 통신할거 json 형식으로 넣기
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`, // 토큰 사용
-            },
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    } catch (e) {
+      // 토큰 추출 에러
+      console.error(e);
+    }
+  };
+  const addWithout = async () => {
+    console.log('의심내역 x');
+    try {
+      const token = await SecureStore.getItemAsync('Token');
+      if (token !== null) {
+        // 토큰을 사용하여 fetch 실행
+        fetch(`${url}/report/add/withoutDoubt`, {
+          method: 'POST',
+          body: JSON.stringify({
+            type: type, //바꿔야함 영어뭐시기로
+            title: selectDoubt,
+            content: content,
+            phoneNumber: phoneNumber,
+          }), // 여기 통신할거 json 형식으로 넣기
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, // 토큰 사용
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // API 응답 처리
+            console.log(data);
           })
-            .then((response) => response.json())
-            .then((data) => {
-              // API 응답 처리
-              console.log(data);
-            })
-            .catch((error) => {
-              console.error(error);
-            });
-        }
+          .catch((error) => {
+            console.error(error);
+          });
       }
     } catch (e) {
       // 토큰 추출 에러
@@ -153,12 +191,15 @@ const ReportScreen = ({ route, navigation }) => {
             style={styles.picker}
             selectedValue={selectDoubt}
             onValueChange={(itemValue, itemIndex) => {
+              //doubtlist 돌면서 doubtID같은거 찾아서 그 안에 있는 object 만 가져오기
+              // doubtId와 일치하는 객체만 가져오기
+              setFilteredObject(list.find((item) => item.title === itemValue));
               setSelectDoubt(itemValue);
-              setPhoneNumber(listNumber[itemIndex]);
+              setPhoneNumber(filteredObject.phoneNumber);
             }}
           >
-            {doubtList.map((doubt, index) => (
-              <Picker.Item key={index} label={doubt} value={doubt} />
+            {doubtList.map((title, index) => (
+              <Picker.Item key={index} label={title} value={title} />
             ))}
           </Picker>
         </>

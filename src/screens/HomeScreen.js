@@ -97,6 +97,23 @@ const HomeScreen = () => {
           </Pressable>
           <Text style={styles.buttontxt}>신고 기록</Text>
         </View>
+
+        <View>
+          <Pressable
+            onPress={() => {
+              navigation.navigate('Banner');
+            }}
+            hitSlop={10}
+            style={styles.button}
+          >
+            <MaterialCommunityIcons
+              name="clipboard-list-outline"
+              size={25}
+              color={WHITE}
+            />
+          </Pressable>
+          <Text style={styles.buttontxt}>test</Text>
+        </View>
       </View>
     </View>
   );
