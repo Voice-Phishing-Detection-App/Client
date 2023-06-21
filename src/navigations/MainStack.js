@@ -93,7 +93,7 @@ const MainStack = () => {
         name="ListDetail"
         component={ListDetailScreen}
         options={{
-          title: '뭐라하지 상세 페이지??',
+          title: '신고 기록',
           headerStyle: {
             backgroundColor: PRIMARY.DEFAULT,
           },

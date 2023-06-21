@@ -1,5 +1,4 @@
-import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { WHITE } from '../color';
+import { FlatList, View } from 'react-native';
 import { useState } from 'react';
 import ListItem from '../components/ListItem';
 import { useEffect } from 'react';
@@ -7,17 +6,12 @@ import EmptyList from '../components/EmptyList';
 import { url } from '../url';
 import * as SecureStore from 'expo-secure-store';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
-
 const DoubtListScreen = () => {
   const [list, setList] = useState([]);
   useEffect(() => {
     check();
   }, []);
+
   const check = async () => {
     try {
       const token = await SecureStore.getItemAsync('Token');
@@ -32,7 +26,6 @@ const DoubtListScreen = () => {
         })
           .then((response) => response.json())
           .then((data) => {
-            // API 응답 처리
             console.log('doubtlistpage:', data);
             setList(data);
           })

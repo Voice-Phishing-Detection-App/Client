@@ -17,39 +17,46 @@ import * as SecureStore from 'expo-secure-store';
 
 const Left = 30;
 
+const typeToTitle = {
+  REPORT_TYPE_FRAUD: '사기',
+  REPORT_TYPE_IMPERSONATING: '사칭',
+  REPORT_TYPE_INDUCE: '설치유도',
+  REPORT_TYPE_DISGUISE: '사고빙자',
+  REPORT_TYPE_NONE: '신고 내역이 없습니다',
+};
+
 const SearchScreen = () => {
   const navigation = useNavigation();
   const [isFocused, setIsFocused] = useState(false);
   const [phoneValue, setPhoneValue] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState(''); // 실제 통신할때는 ''로 설정 -> ''일때는 신고정보 안보임
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [count, setCount] = useState('');
   const [type, setType] = useState([]);
   const onCheck = async () => {
     try {
       const token = await SecureStore.getItemAsync('Token');
       if (token !== null) {
-        // 토큰을 사용하여 fetch 실행
         fetch(`${url}/report/search`, {
           method: 'POST',
-          body: JSON.stringify({ phoneNumber: phoneValue }), // 여기 통신할거 json 형식으로 넣기
+          body: JSON.stringify({ phoneNumber: phoneValue }),
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`, // 토큰 사용
+            Authorization: `Bearer ${token}`,
           },
         })
           .then((response) => response.json())
           .then((data) => {
-            // API 응답 처리
             setPhoneNumber(data.phoneNumber);
             setCount(data.reportCount);
-            setType(data.type);
+            const transformedTypes = data.type.map((t) => typeToTitle[t] || t);
+            setType(transformedTypes);
+            console.log(data);
           })
           .catch((error) => {
             console.error(error);
           });
       }
     } catch (e) {
-      // 토큰 추출 에러
       console.error(e);
     }
   };
@@ -91,21 +98,23 @@ const SearchScreen = () => {
         <Text style={styles.middletext}>신고 정보</Text>
       </View>
       <ScrollView style={styles.bottom}>
-        <Pressable
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            margin: 20,
-          }}
-          onPress={() => {
-            navigation.navigate('SearchList', { phoneNumber });
-          }}
-        >
-          <AntDesign name="caretright" size={15} color="black" />
-          <Text style={{ fontSize: 18, marginLeft: 15 }}>자세히 보기</Text>
-        </Pressable>
+        {count > 0 && (
+          <Pressable
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              margin: 20,
+            }}
+            onPress={() => {
+              navigation.navigate('SearchList', { phoneNumber });
+            }}
+          >
+            <AntDesign name="caretright" size={15} color="black" />
+            <Text style={{ fontSize: 18, marginLeft: 15 }}>자세히 보기</Text>
+          </Pressable>
+        )}
         <ReportList list={'전화번호'} item={phoneNumber} />
-        <ReportList list={'횟수'} item={count} />
+        <ReportList list={'횟수'} item={count.toString()} />
         {Array.isArray(type) &&
           type.length > 0 &&
           type.map((item, index) => (
@@ -130,7 +139,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   top: {
-    flex: 1.5,
+    flex: 1,
   },
   middle: {
     flex: 0.2,
