@@ -5,6 +5,13 @@ import { useEffect, useState } from 'react';
 import { url } from '../url';
 import * as SecureStore from 'expo-secure-store';
 
+const typeToTitle = {
+  REPORT_TYPE_FRAUD: '사기',
+  REPORT_TYPE_IMPERSONATING: '사칭',
+  REPORT_TYPE_INDUCE: '설치유도',
+  REPORT_TYPE_DISGUISE: '사고빙자',
+};
+
 const SearchListScreen = ({ route, navigation }) => {
   const [list, setList] = useState([]);
   const { phoneNumber } = route.params;
@@ -16,19 +23,22 @@ const SearchListScreen = ({ route, navigation }) => {
     try {
       const token = SecureStore.getItemAsync('Token');
       if (token !== null) {
-        // 토큰을 사용하여 fetch 실행
         fetch(`${url}/report/searchList`, {
           method: 'POST',
-          body: JSON.stringify({ phoneNumber: phoneNumber }), // 여기 통신할거 json 형식으로 넣기
+          body: JSON.stringify({ phoneNumber: phoneNumber }),
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`, // 토큰 사용
+            Authorization: `Bearer ${token}`,
           },
         })
           .then((response) => response.json())
           .then((data) => {
-            // API 응답 처리
-            console.log(list);
+            data = data.map((item) => {
+              return {
+                ...item,
+                type: typeToTitle[item.type] || item.type,
+              };
+            });
             setList(data);
             console.log(list);
           })
@@ -37,7 +47,6 @@ const SearchListScreen = ({ route, navigation }) => {
           });
       }
     } catch (e) {
-      // 토큰 추출 에러
       console.error(e);
     }
   }, []);
