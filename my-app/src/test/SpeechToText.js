@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Button,
   Text,
   Alert,
   PermissionsAndroid,
@@ -8,11 +7,13 @@ import {
   View,
   StyleSheet,
   Pressable,
+  LogBox,
 } from 'react-native';
 import Voice from '@react-native-voice/voice';
-import { FontAwesome } from '@expo/vector-icons';
 
 const SpeechToText = () => {
+  LogBox.ignoreLogs([`new NativeEventEmitter()`]);
+
   const [transcript, setTranscript] = useState('');
 
   useEffect(() => {
