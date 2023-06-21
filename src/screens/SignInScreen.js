@@ -43,11 +43,14 @@ const SignInScreen = ({ navigation }) => {
               // 로그인 성공 후 메인 화면으로 이동
               navigation.navigate('Main');
             } catch (e) {
+              Alert.alert('로그인 실패');
               console.error('token 에러: ' + e);
+              setIsLoading(false);
             }
           })
           .catch((error) => {
-            console.error(error);
+            console.error('tokne 만료:' + error);
+            setIsLoading(false);
           });
       } catch (e) {
         Alert.alert('로그인 실패', e, [

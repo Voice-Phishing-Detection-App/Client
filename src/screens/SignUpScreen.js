@@ -42,8 +42,10 @@ const SignUpScreen = ({ navigation }) => {
           })
           .catch((error) => {
             console.error(error);
+            setIsLoading(false);
           });
       } catch (e) {
+        setIsLoading(false);
         Alert.alert('회원가입 실패', e, [
           {
             text: 'Ok',
