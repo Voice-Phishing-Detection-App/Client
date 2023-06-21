@@ -3,13 +3,13 @@ import { GRAY } from '../color';
 import PropTypes from 'prop-types';
 
 const ListDetailScreen = ({ route, navigation }) => {
-  const { type } = route.params;
+  const { title } = route.params;
   const { registrationDate } = route.params;
   const { content } = route.params;
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{type}</Text>
+      <Text style={styles.title}>{title}</Text>
       <View style={styles.dateview}>
         <Text style={styles.date}>{registrationDate}</Text>
       </View>

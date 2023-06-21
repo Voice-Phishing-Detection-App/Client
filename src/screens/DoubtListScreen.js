@@ -8,6 +8,9 @@ import * as SecureStore from 'expo-secure-store';
 
 const DoubtListScreen = () => {
   const [list, setList] = useState([]);
+  useEffect(() => {
+    check();
+  }, []);
 
   const check = async () => {
     try {
@@ -36,15 +39,10 @@ const DoubtListScreen = () => {
     }
   };
 
-  useEffect(() => {
-    check();
-  }, []);
   return list.length ? (
     <FlatList
       data={list}
-      renderItem={({ item }) => (
-        <ListItem name="DoubtList" item={item} list={list} />
-      )}
+      renderItem={({ item }) => <ListItem name="DoubtList" item={item} />}
       windowSize={5}
       // ListHeaderComponent={() => <View style={{ height: 10 }}></View>}
       ListHeaderComponent={View}

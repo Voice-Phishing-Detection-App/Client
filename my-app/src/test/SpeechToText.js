@@ -10,14 +10,53 @@ import {
   LogBox,
 } from 'react-native';
 import Voice from '@react-native-voice/voice';
+// import Constants from 'expo-constants';
+// import * as Notifications from 'expo-notifications';
+// import { Vibration } from 'react-native';
+
+// Notifications.setNotificationHandler({
+//   handleNotification: async () => ({
+//     shouldShowAlert: true,
+//     shouldPlaySound: true,
+//     shouldSetBadge: false,
+//   }),
+// });
 
 const SpeechToText = () => {
   LogBox.ignoreLogs([`new NativeEventEmitter()`]);
 
   const [transcript, setTranscript] = useState('');
+  // const [expoPushToken, setExpoPushToken] = useState('');
+  // const [notification, setNotification] = useState(false);
+  // const notificationListener = useRef();
+  // const responseListener = useRef();
+  // const [level, setLevel] = useState();
 
   useEffect(() => {
     requestMicrophonePermission();
+    // registerForPushNotificationsAsync().then((token) =>
+    //   setExpoPushToken(token)
+    // );
+
+    // // 알림 수신 리스너 등록
+    // notificationListener.current =
+    //   Notifications.addNotificationReceivedListener((notification) => {
+    //     setNotification(notification);
+    //   });
+
+    // // 알림 응답 리스너 등록
+    // responseListener.current =
+    //   Notifications.addNotificationResponseReceivedListener((response) => {
+    //     console.log(response);
+    //   });
+
+    // // 컴포넌트 언마운트 시 알림 리스너 제거
+    // return () => {
+    //   Notifications.removeNotificationSubscription(
+    //     notificationListener.current
+    //   );
+    //   Notifications.removeNotificationSubscription(responseListener.current);
+    // };
   }, []);
 
   const requestMicrophonePermission = async () => {
@@ -88,6 +127,8 @@ const SpeechToText = () => {
 
       let data = await response.json();
       console.log(data); // 서버 응답 출력
+      setLevel(data.level);
+      // await schedulePushNotification();
     } catch (error) {
       console.error(error);
     }

@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 
-const ListItem = memo(({ name, item, list }) => {
+const ListItem = memo(({ name, item }) => {
   const navigation = useNavigation();
   // const doubtList = list.map((obj) => obj.type);
   return (
@@ -12,13 +12,13 @@ const ListItem = memo(({ name, item, list }) => {
       onPress={() => {
         if (name == 'DoubtList') {
           console.log('listitem:', item);
+          console.log('listitem:', item.doubtId);
           navigation.navigate('Report', {
-            doubtId: item.doubtId,
-            // doubtList: doubtList,
+            id: item.doubtId,
           });
         } else {
           navigation.navigate('ListDetail', {
-            type: item.type, //임시임
+            title: item.title, //임시임
             registrationDate: item.registrationDate,
             content: item.content,
           });
@@ -40,7 +40,7 @@ const ListItem = memo(({ name, item, list }) => {
       ) : ( */}
       <View style={styles.container}>
         <View style={styles.task1}>
-          <Text style={styles.task1txt}>{item.type}</Text>
+          <Text style={styles.task1txt}>{item.title}</Text>
         </View>
         <View style={styles.task2}>
           <Text>{item.registrationDate}</Text>
