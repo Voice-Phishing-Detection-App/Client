@@ -35,13 +35,16 @@ const SignUpScreen = ({ navigation }) => {
             'Content-Type': 'application/json',
           },
         })
-          .then((response) => response.json())
+          .then((response) => response.text())
           .then((data) => {
-            navigation.navigate('Auth');
             console.log(data); // id가 반환
+            setIsLoading(false);
+            Alert.alert('회원가입 완료');
+            navigation.push('Auth');
           })
           .catch((error) => {
             console.error(error);
+            setIsLoading(false);
           });
       } catch (e) {
         Alert.alert('회원가입 실패', e, [

@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Button,
   Text,
   Alert,
   PermissionsAndroid,
   Platform,
+  View,
+  StyleSheet,
+  Pressable,
+  LogBox,
 } from 'react-native';
 import Voice from '@react-native-voice/voice';
 
 const SpeechToText = () => {
+  LogBox.ignoreLogs([`new NativeEventEmitter()`]);
+
   const [transcript, setTranscript] = useState('');
 
   useEffect(() => {
@@ -52,6 +57,7 @@ const SpeechToText = () => {
 
   const stopListening = async () => {
     try {
+      console.log('종료');
       await Voice.stop();
     } catch (error) {
       console.error('Failed to stop Voice:', error);
@@ -65,17 +71,20 @@ const SpeechToText = () => {
 
   const sendToServer = async (text) => {
     try {
-      let response = await fetch(`http://172.30.1.65:8080/doubt`, {
-        method: 'POST',
-        body: JSON.stringify({
-          phoneNumber: '01000000000',
-          text: transcript,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY4NzI0Mjc1NiwiZXhwIjoxNjg3MjQ5NzU2fQ.L1ge7dFygn08EeCFT0tG1gjBWBUQCVjrL90v_QTnhfsYmki_kU7--UCOzAsP5B1TscJ8RIlC_CA8vY97btRs6w`,
-        },
-      });
+      let response = await fetch(
+        `https://ae88-2001-e60-1099-856d-3d3f-f1e6-73ef-1ec7.ngrok-free.app/doubt`,
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            phoneNumber: '01000000000',
+            text: text,
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY4NzI1NjM1MCwiZXhwIjoxNjg3MzI2MzUwfQ.JPfQXF2isGpBEoySmecFVjOQs3syZcafdsLKItWniZEPBiOQkH4L95T4O0MaX-MXlh6fjsvzOtMnIHWEk-LOmA`,
+          },
+        }
+      );
 
       let data = await response.json();
       console.log(data); // 서버 응답 출력
@@ -93,12 +102,39 @@ const SpeechToText = () => {
   }, []);
 
   return (
-    <>
-      <Button title="Start Listening" onPress={startListening} />
-      <Button title="Stop Listening" onPress={stopListening} />
-      <Text>{transcript}</Text>
-    </>
+    <View style={styles.container}>
+      <Pressable style={styles.button} onPress={startListening}>
+        <Text style={{ color: '#ffffff' }}>음성 시작</Text>
+      </Pressable>
+      <Pressable style={styles.button} onPress={stopListening}>
+        <Text style={{ color: '#ffffff' }}>음성 종료</Text>
+      </Pressable>
+      <View style={styles.textbox}>
+        <Text>{transcript}</Text>
+      </View>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  button: {
+    width: 100,
+    height: 50,
+    backgroundColor: '#000000',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textbox: {
+    width: 400,
+    height: 400,
+    borderWidth: 1,
+    marginTop: 40,
+  },
+});
 
 export default SpeechToText;
