@@ -145,7 +145,7 @@ const MainStack = () => {
           },
         }}
       />
-      <Stack.Screen name="Banner" component={BannerScreen} />
+      {/* <Stack.Screen name="Banner" component={BannerScreen} /> */}
     </Stack.Navigator>
   );
 };

@@ -38,6 +38,23 @@ const ReportScreen = ({ route, navigation }) => {
     console.log('id ', id);
     check();
   }, [id]);
+  useEffect(() => {
+    if (list.length > 0) {
+      setDoubtList(list.map((item) => item.title));
+      console.log('len:', doubtList);
+      if (id) {
+        setFilteredObject(list.find((item) => item.doubtId === id));
+      }
+      // else {
+      //   setFilteredObject(list.find((item) => item.title === doubtList[0]));
+      //   console.log('ddd:', doubtList);
+      //   console.log('select[0]:', doubtList[0]);
+      //   console.log('ddd:', filteredObject);
+      //   console.log('phonenumber:', filteredObject.phoneNumber);
+      //   setPhoneNumber(filteredObject.phoneNumber);
+      // }
+    }
+  }, [list]);
   const check = async () => {
     try {
       const token = await SecureStore.getItemAsync('Token');
@@ -54,17 +71,12 @@ const ReportScreen = ({ route, navigation }) => {
           .then((data) => {
             // API 응답 처리
             //반복문 돌면서 ? doubtID같은거?
-            console.log(data);
+            console.log('data:', data);
             setList(data);
-            console.log(list);
-            const doubtlist = list.map((item) => item.title);
-            setDoubtList(doubtlist);
-            setPhoneNumber(doubtlist.phoneNumber);
-            console.log('list: ', doubtlist);
-            console.log('list: ', doubtList);
-            if (id) {
-              setFilteredObject(list.find((item) => item.doubtId === id));
-            }
+            // console.log(list);
+            // setDoubtList(list.map((item) => item.title));
+            // setPhoneNumber(doubtList.phoneNumber);
+            // console.log('list: ', doubtList);
 
             // console.log('id:', id);
             //이거는 의심내역 클릭해서 넘어왔을때!
@@ -122,6 +134,7 @@ const ReportScreen = ({ route, navigation }) => {
           .then((data) => {
             // API 응답 처리
             console.log(data);
+            alert('신고가 접수되었습니다. 감사합니다.');
           })
           .catch((error) => {
             console.error(error);
@@ -155,6 +168,7 @@ const ReportScreen = ({ route, navigation }) => {
           .then((data) => {
             // API 응답 처리
             console.log(data);
+            alert('신고가 접수되었습니다. 감사합니다.');
           })
           .catch((error) => {
             console.error(error);
@@ -165,6 +179,7 @@ const ReportScreen = ({ route, navigation }) => {
       console.error(e);
     }
   };
+  // check();
   return (
     <ScrollView style={styles.container}>
       <ReportBox text="통화 후 의심 판정 여부" />

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Text, View, Button, Platform } from 'react-native';
 import Constants from 'expo-constants';
-import { Notifications } from 'expo';
+import * as Notifications from 'expo-notifications';
 import { Vibration } from 'react-native';
 
 Notifications.setNotificationHandler({

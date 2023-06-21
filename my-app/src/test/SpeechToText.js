@@ -7,51 +7,51 @@ import {
   Platform,
 } from 'react-native';
 import Voice from '@react-native-voice/voice';
-import Constants from 'expo-constants';
-import * as Notifications from 'expo-notifications';
+// import Constants from 'expo-constants';
+// import * as Notifications from 'expo-notifications';
 // import { Vibration } from 'react-native';
 
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: false,
-  }),
-});
+// Notifications.setNotificationHandler({
+//   handleNotification: async () => ({
+//     shouldShowAlert: true,
+//     shouldPlaySound: true,
+//     shouldSetBadge: false,
+//   }),
+// });
 
 const SpeechToText = () => {
   const [transcript, setTranscript] = useState('');
-  const [expoPushToken, setExpoPushToken] = useState('');
-  const [notification, setNotification] = useState(false);
-  const notificationListener = useRef();
-  const responseListener = useRef();
-  const [level, setLevel] = useState();
+  // const [expoPushToken, setExpoPushToken] = useState('');
+  // const [notification, setNotification] = useState(false);
+  // const notificationListener = useRef();
+  // const responseListener = useRef();
+  // const [level, setLevel] = useState();
 
   useEffect(() => {
     requestMicrophonePermission();
-    registerForPushNotificationsAsync().then((token) =>
-      setExpoPushToken(token)
-    );
+    // registerForPushNotificationsAsync().then((token) =>
+    //   setExpoPushToken(token)
+    // );
 
-    // 알림 수신 리스너 등록
-    notificationListener.current =
-      Notifications.addNotificationReceivedListener((notification) => {
-        setNotification(notification);
-      });
+    // // 알림 수신 리스너 등록
+    // notificationListener.current =
+    //   Notifications.addNotificationReceivedListener((notification) => {
+    //     setNotification(notification);
+    //   });
 
-    // 알림 응답 리스너 등록
-    responseListener.current =
-      Notifications.addNotificationResponseReceivedListener((response) => {
-        console.log(response);
-      });
+    // // 알림 응답 리스너 등록
+    // responseListener.current =
+    //   Notifications.addNotificationResponseReceivedListener((response) => {
+    //     console.log(response);
+    //   });
 
-    // 컴포넌트 언마운트 시 알림 리스너 제거
-    return () => {
-      Notifications.removeNotificationSubscription(
-        notificationListener.current
-      );
-      Notifications.removeNotificationSubscription(responseListener.current);
-    };
+    // // 컴포넌트 언마운트 시 알림 리스너 제거
+    // return () => {
+    //   Notifications.removeNotificationSubscription(
+    //     notificationListener.current
+    //   );
+    //   Notifications.removeNotificationSubscription(responseListener.current);
+    // };
   }, []);
 
   const requestMicrophonePermission = async () => {
@@ -142,7 +142,7 @@ const SpeechToText = () => {
       <Button title="Start Listening" onPress={startListening} />
       <Button title="Stop Listening" onPress={stopListening} />
       <Text>{transcript}</Text>
-      <View
+      {/* <View
         style={{
           flex: 1,
           alignItems: 'center',
@@ -166,42 +166,42 @@ const SpeechToText = () => {
             await schedulePushNotification();
           }}
         />
-      </View>
+      </View> */}
     </>
   );
 };
 
-async function schedulePushNotification() {
-  // Vibration.vibrate([600, 50, 600, 10]); // 1초 진동, 0.5초 일시 중지, 2초 진동
-  await Notifications.scheduleNotificationAsync({
-    content: {
-      title: `[보이스피싱 감지] 단계 알림입니다.`,
-      body: '보이스피싱이 의심됩니다! 주의하세요 !',
-      data: { data: 'goes here' },
-    },
-    trigger: { seconds: 2 },
-  });
-  // 진동 패턴 사용
-}
+// async function schedulePushNotification() {
+//   // Vibration.vibrate([600, 50, 600, 10]); // 1초 진동, 0.5초 일시 중지, 2초 진동
+//   await Notifications.scheduleNotificationAsync({
+//     content: {
+//       title: `[보이스피싱 감지] 단계 알림입니다.`,
+//       body: '보이스피싱이 의심됩니다! 주의하세요 !',
+//       data: { data: 'goes here' },
+//     },
+//     trigger: { seconds: 2 },
+//   });
+//   // 진동 패턴 사용
+// }
 
-// 푸시 알림 등록 함수
-async function registerForPushNotificationsAsync() {
-  let token;
+// // 푸시 알림 등록 함수
+// async function registerForPushNotificationsAsync() {
+//   let token;
 
-  if (Platform.OS === 'android') {
-    console.log('들어움');
-    await Notifications.setNotificationChannelAsync('default', {
-      name: 'default',
-      importance: Notifications.AndroidImportance.MAX,
-      vibrationPattern: [0, 250, 250, 250], // 진동 패턴 설정
-      sound: 'default', // 기본 알림음 재생
-    });
-  }
+//   if (Platform.OS === 'android') {
+//     console.log('들어움');
+//     await Notifications.setNotificationChannelAsync('default', {
+//       name: 'default',
+//       importance: Notifications.AndroidImportance.MAX,
+//       vibrationPattern: [0, 250, 250, 250], // 진동 패턴 설정
+//       sound: 'default', // 기본 알림음 재생
+//     });
+//   }
 
-  // Expo 상수에서 푸시 토큰 가져오기
-  token = Constants?.manifest?.extra?.expoPushToken;
+//   // Expo 상수에서 푸시 토큰 가져오기
+//   token = Constants?.manifest?.extra?.expoPushToken;
 
-  return token;
-}
+//   return token;
+// }
 
 export default SpeechToText;

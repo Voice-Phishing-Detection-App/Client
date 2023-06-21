@@ -1,11 +1,11 @@
-import BannerScreen from './test/BannerScreen';
+// import BannerScreen from './test/BannerScreen';
 import SpeechToText from './test/SpeechToText';
 
 const App = () => {
   return (
     <>
-      {/* <SpeechToText /> */}
-      <BannerScreen />
+      <SpeechToText />
+      {/* <BannerScreen /> */}
     </>
   );
 };
