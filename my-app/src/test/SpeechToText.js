@@ -10,53 +10,13 @@ import {
   LogBox,
 } from 'react-native';
 import Voice from '@react-native-voice/voice';
-// import Constants from 'expo-constants';
-// import * as Notifications from 'expo-notifications';
-// import { Vibration } from 'react-native';
-
-// Notifications.setNotificationHandler({
-//   handleNotification: async () => ({
-//     shouldShowAlert: true,
-//     shouldPlaySound: true,
-//     shouldSetBadge: false,
-//   }),
-// });
 
 const SpeechToText = () => {
   LogBox.ignoreLogs([`new NativeEventEmitter()`]);
-
   const [transcript, setTranscript] = useState('');
-  // const [expoPushToken, setExpoPushToken] = useState('');
-  // const [notification, setNotification] = useState(false);
-  // const notificationListener = useRef();
-  // const responseListener = useRef();
-  // const [level, setLevel] = useState();
 
   useEffect(() => {
     requestMicrophonePermission();
-    // registerForPushNotificationsAsync().then((token) =>
-    //   setExpoPushToken(token)
-    // );
-
-    // // 알림 수신 리스너 등록
-    // notificationListener.current =
-    //   Notifications.addNotificationReceivedListener((notification) => {
-    //     setNotification(notification);
-    //   });
-
-    // // 알림 응답 리스너 등록
-    // responseListener.current =
-    //   Notifications.addNotificationResponseReceivedListener((response) => {
-    //     console.log(response);
-    //   });
-
-    // // 컴포넌트 언마운트 시 알림 리스너 제거
-    // return () => {
-    //   Notifications.removeNotificationSubscription(
-    //     notificationListener.current
-    //   );
-    //   Notifications.removeNotificationSubscription(responseListener.current);
-    // };
   }, []);
 
   const requestMicrophonePermission = async () => {
@@ -110,27 +70,28 @@ const SpeechToText = () => {
 
   const sendToServer = async (text) => {
     try {
-      let response = await fetch(
-        `https://ae88-2001-e60-1099-856d-3d3f-f1e6-73ef-1ec7.ngrok-free.app/doubt`,
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            phoneNumber: '01000000000',
-            text: text,
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY4NzI1NjM1MCwiZXhwIjoxNjg3MzI2MzUwfQ.JPfQXF2isGpBEoySmecFVjOQs3syZcafdsLKItWniZEPBiOQkH4L95T4O0MaX-MXlh6fjsvzOtMnIHWEk-LOmA`,
-          },
-        }
-      );
-
-      let data = await response.json();
-      console.log(data); // 서버 응답 출력
-      setLevel(data.level);
-      // await schedulePushNotification();
-    } catch (error) {
-      console.error(error);
+      fetch(`https://51c2-119-70-86-177.ngrok-free.app/doubt`, {
+        method: 'POST',
+        body: JSON.stringify({
+          phoneNumber: '01000000000',
+          text: text,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY4NzM0NTYyNCwiZXhwIjoxNjg3NDE1NjI0fQ.SEx5fA-dpIJTksGZwge0W-zv9iQu5KEyLct5LHw3f6Nc2xGE1vx0m9nUX2EVBPEyw0_aH85PUbyvtvy8lLWgtA`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data); // 서버 응답 출력
+          Alert.alert(data.level + '단계 보이스피싱 위험 감지');
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } catch (e) {
+      // 토큰 추출 에러
+      console.error(e);
     }
   };
 
