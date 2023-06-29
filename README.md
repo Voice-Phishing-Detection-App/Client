@@ -61,5 +61,26 @@ Android 9 이상
 
   
 ### 구현 
-- [신혜민](https://github.com/heymin2)
-- [문예주](https://github.com/moonyeju)
+<details>
+<summary> 🌕 Client Developer</summary>
+<div markdown="1">
+
+  - [문예주](https://github.com/moonyeju)
+  - [신혜민](https://github.com/heymin2)
+  </div>
+</details>
+<details>
+<summary> 🌓 Server&AI Developer</summary>
+<div markdown="1">
+  
+- [안수진](https://github.com/ssuzyn)
+- [조유정](https://github.com/hiyoojeong)
+  </div>
+</details>
+<details>
+<summary> 🌑 Server Developer</summary>
+<div markdown="1">
+  
+- [김민주](https://github.com/miiiinju1)
+  </div>
+</details>
