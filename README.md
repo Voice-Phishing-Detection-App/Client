@@ -1,0 +1,64 @@
+# Phinochio
+>**🔍 React-Native를 이용한 안드로이드용 보이스피싱 탐지 앱**
+>
+>**프로젝트 기간 : 2023.05.01(월) ~ 진행중**
+<br>
+
+## 🌠 보이스피싱 탐지 흐름
+<image  width=600 src=https://github.com/heymin2/Voice-Phishing-Detection-App/assets/97522726/48010109-2f74-4d33-87eb-02de74e23c6e>
+
+
+## 🪄 실행 
+#### 1. 전체 폴더 - expo
+```
+expo start --tunnel
+```
+
+
+#### 2️. my-app 폴더 - expo bare workflow
+```
+npx expo start --dev-client
+```
+
+## 💻 개발 환경 
+Android 9 이상
+```
+클라이언트 개발 플랫폼 : Android
+클라이언트 개발 환경 : VSCode
+클라이언트 개발 프레임워크 : React-Native
+디자인 : 피그마
+```
+
+
+### 📌 깃 사용 전략
+> 각자 Fork -> Commit -> Push -> PR -> Merge -> Pull받고 작업
+<details>
+<summary> 컨벤션 보기</summary>
+<div markdown="1">
+  
+```
+[FEAT]	새로운 기능 추가
+[FIX]	버그 수정
+[DOCS]	문서 수정
+[REFACTOR]	코드 전면 수정
+[TEST]	테스트 코드, 리팩토링 테스트 코드 추가
+[CHORE]	코드 수정, 내부 파일 수정, 주석
+[RENAME]	파일 또는 폴더 명을 수정하거나 옮기는 작업만인 경우
+[REMOVE]	파일을 삭제하는 작업만 수행한 경우
+[INIT]	프로젝트 생성
+[ADD]	Feat 이외의 부수적인 코드 추가, 라이브러리 추가, 새로운 파일 생성 시, 에셋 추가
+```
+
+  </div>
+</details>
+
+
+
+### 📑 문서 
+- [발표자료](https://github.com/heymin2/Voice-Phishing-Detection-App/files/11901194/_._.1.pdf)
+- [피그마](https://www.figma.com/file/8RuHW7hZWDgdeX7cKI2U0Q/2023%EB%85%84%EB%8F%84-%EC%A2%85%ED%95%A9%EC%84%A4%EA%B3%84%EA%B3%BC%EC%A0%9C_%EB%B3%B4%EC%9D%B4%EC%8A%A4%ED%94%BC%EC%8B%B1?type=design&node-id=0-1&mode=design&t=8KdYkAZOAYETqHtz-0)
+
+  
+### 구현 
+- [신혜민](https://github.com/heymin2)
+- [문예주](https://github.com/moonyeju)
